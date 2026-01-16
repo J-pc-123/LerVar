@@ -1,0 +1,16 @@
+================================================================================
+LerVar(v.pre-?.?_Beta?, v.release-?.?.?)
+
+since 2025
+Copyright (c) 2025
+J_pc and/or his studios
+All rights reserved
+================================================================================
+
+-简体中文-:
+存放接口类包的标识符命名原则:
+LerVar中的所有接口都应按其功能, 放在名为 "of_+功能类型" 的包中，可以将接口在上级包目录中添加的包, 如 com.lervar.interfaces.of_lervar_output.of_system_print (只有LerVar中所有接口的基类和异常类，即"LerVarBaseInterface.java"与"LerVarInterfacesException.java"和此文档位于com.LerVar.interfaces包中), 基于LerVar开发的插件尽量遵循将包命名为 "_全小写插件名_+of_+功能类型" 的形式; 接口名, 以及其他标识符的命名则遵循Java标识符命名原则与各自的行业标准.
+
+-English-:
+The Naming Principle for Packages Containing Interface Classes:
+In LerVar, all interfaces should be placed in packages named "of_" + <functional type> according to their functionality. Sub-packages can be created within higher-level package directories, such as "com.lervar.interfaces.of_lervar_output.of_system_print" (with the exception that only the base class and exception class for all interfaces in LerVar, namely "LerVarBaseInterface.java", "LerVarInterfacesException.java" and this film, reside in the "com.LerVar.interfaces" package). Plugins developed based on LerVar should follow the naming convention for packages as <_lowercase_plugin_name> + "_of_" + <functional type>. Interface names, along with other identifiers, should adhere to Java identifier naming principles and their respective industry standards.
