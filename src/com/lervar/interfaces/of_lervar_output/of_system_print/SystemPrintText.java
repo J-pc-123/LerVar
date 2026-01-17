@@ -42,23 +42,23 @@ public interface SystemPrintText {
                                                    #/---------------->
                                                    /
                                                   /
-                                                 /
-                                                /
+                WWW                              /
+                WWW                             /
                WWW                             /
                WWW                     File---/
               WWW                            /
-              WWW            MMMMM   W| WWW>/
-             WWW           MM____MM  W^W   /<
-             WWW______WWW  MM        W|   /
-            LWWWWWWWWWWWW   MMMMMM^  W|  /
+              WWW            MMMM   W| WWW >/
+             WWW           MM___MM  W^W   W/<
+             WWW______WWW  MM       W|   M/M           MMM
+            LWWWWWWWWWWWW   MMMMM^  W|   #MM          MMM
                                         / MMM        MMM
                                        /  MMM       MMM
                                       /   MMM      MMM
                                      /     MMM    MMM
-                                    /      MMM   MMM    $WWWWW$   W| WWWW
-                                   /       MMM  MMM   WW     WW   W^W    M
-                                  /         MMMMM     WW     WW   W|
-                                 /          WWWW       WWWWWW WW  W|
+                                    /      MMM   MMM    $WWW$   W| WWW
+                                   /       MMM  MMM   WW   WW   W^W   M
+                                  /         MMMMM     WW   WW   W|
+                                 /          WWWW       WWWW WW  W|
                                 /
                                /
              <----------------/#
