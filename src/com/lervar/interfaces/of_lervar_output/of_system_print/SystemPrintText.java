@@ -28,10 +28,10 @@ public interface SystemPrintText {
                                        /     MMM       MMM
                                       /      MMM      MMM
                                      /        MMM    MMM
-                                    /         MMM   MMM    $WWWWW$   W| WWWW
-                                   /          MMM  MMM   WW     WW   W^W    M
-                                  /            MMMMM     WW     WW   W|
-                                 /             WWWW       WWWWWW WW  W|
+                                    /         MMM   MMM    $WWWW$   W| WWWW
+                                   /          MMM  MMM   WW    WW   W^W    M
+                                  /            MMMMM     WW    WW   W|
+                                 /             WWWW       WWWWW WW  W|
                                 /
                                /
              <----------------/#

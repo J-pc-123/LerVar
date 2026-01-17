@@ -15,7 +15,7 @@ import com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintLan
 import java.util.Scanner;
 
 /**
- * Encoding:GBK
+ * Encoding:GB18030
  */
 public class OptionPrint implements OptionPrintLanguages {
     public static void optionPrint() {
