@@ -10,7 +10,7 @@
 package com.lervar.interfaces.of_lervar_output.of_system_print;
 
 public interface SystemPrintText {
-    String lervarIcon_Linux = """
+    String LERVAR_ICON_LINUX = """
             ==========================================================================================
                                                    #/---------------->
                                                    /
@@ -37,7 +37,7 @@ public interface SystemPrintText {
              <----------------/#
              ==========================================================================================
             """;
-    String lervarIcon_Windows = """
+    String LERVAR_ICON_WINDOWS = """
             ==========================================================================================
                                                    #/---------------->
                                                    /
@@ -64,7 +64,7 @@ public interface SystemPrintText {
              <----------------/#
             ==========================================================================================
             """;
-    String lervarVersion = "v.pre-1.0_Beta2";
-    String os = System.getProperty("os.name").toLowerCase();
-    String osArch = System.getProperty("os.arch").toLowerCase();
+    String LERVAR_VERSION = "v.pre-1.0_Beta2";
+    String OS = System.getProperty("os.name").toLowerCase();
+    String OS_ARCH = System.getProperty("os.arch").toLowerCase();
 }
