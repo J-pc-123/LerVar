@@ -22,16 +22,16 @@ public interface SystemPrintText {
               WWW                            /
               WWW            MMMMM   W| WWW\u001B[31mW\u001B[0m/
              WWW           MM____MM  W^W   /\u001B[31mM\u001B[0m
-             WWW______WWW  MM        W|  M/M           MMM
-            LWWWWWWWWWWWW   MMMMMM^  W|  /MM          MMM
-                                        / MMM        MMM
-                                       /  MMM       MMM
-                                      /   MMM      MMM
-                                     /     MMM    MMM
-                                    /      MMM   MMM    $WWWWW$   W| WWWW
-                                   /       MMM  MMM   WW     WW   W^W    M
-                                  /         MMMMM     WW     WW   W|
-                                 /          WWWW       WWWWWW WW  W|
+             WWW______WWW  MM        W|   / MMM           MMM
+            LWWWWWWWWWWWW   MMMMMM^  W|  /  MMM          MMM
+                                        /    MMM        MMM
+                                       /     MMM       MMM
+                                      /      MMM      MMM
+                                     /        MMM    MMM
+                                    /         MMM   MMM    $WWWWW$   W| WWWW
+                                   /          MMM  MMM   WW     WW   W^W    M
+                                  /            MMMMM     WW     WW   W|
+                                 /             WWWW       WWWWWW WW  W|
                                 /
                                /
              <----------------/#
@@ -49,16 +49,16 @@ public interface SystemPrintText {
               WWW                            /
               WWW            MMMM   W| WWW >/
              WWW           MM___MM  W^W   W/<
-             WWW______WWW  MM       W|   M/M           MMM
-            LWWWWWWWWWWWW   MMMMM^  W|   #MM          MMM
-                                        / MMM        MMM
-                                       /  MMM       MMM
-                                      /   MMM      MMM
-                                     /     MMM    MMM
-                                    /      MMM   MMM    $WWW$   W| WWW
-                                   /       MMM  MMM   WW   WW   W^W   M
-                                  /         MMMMM     WW   WW   W|
-                                 /          WWWW       WWWW WW  W|
+             WWW______WWW  MM       W|    / MMM           MMM
+            LWWWWWWWWWWWW   MMMMM^  W|   /  MMM          MMM
+                                        /    MMM        MMM
+                                       /     MMM       MMM
+                                      /      MMM      MMM
+                                     /        MMM    MMM
+                                    /         MMM   MMM    $WWW$   W| WWW
+                                   /          MMM  MMM   WW   WW   W^W   M
+                                  /            MMMMM     WW   WW   W|
+                                 /             WWWW       WWWW WW  W|
                                 /
                                /
              <----------------/#

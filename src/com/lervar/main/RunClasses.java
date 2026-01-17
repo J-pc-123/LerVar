@@ -9,8 +9,12 @@
 
 package com.lervar.main;
 
+import com.lervar.main.system_print.OptionPrint;
+import com.lervar.main.system_print.SystemPrint;
+
 public class RunClasses {
     public static void runClasses() {
-    
+        SystemPrint.systemPrint();
+        OptionPrint.optionPrint();
     }
 }
