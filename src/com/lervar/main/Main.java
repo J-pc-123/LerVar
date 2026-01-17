@@ -9,8 +9,6 @@
 
 package com.lervar.main;
 
-import java.io.IOException;
-
 /**
  * >build in JDK 17.0.0<
  */
