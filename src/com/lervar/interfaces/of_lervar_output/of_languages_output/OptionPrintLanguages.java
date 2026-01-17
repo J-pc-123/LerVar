@@ -21,4 +21,14 @@ public interface OptionPrintLanguages {
             {"转换", "解析", "加密"},
             {"轉換", "解析", "加密"}
     };
+    String[] CHOOSE_FILE = {
+            "Choose file",
+            "选择文件",
+            "選擇檔案"
+    };
+    String[] CHOOSE_PULLING_PATH = {
+            "Choose pulling path",
+            "选择插件路径",
+            "選擇插件路徑"
+    };
 }

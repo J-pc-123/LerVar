@@ -9,8 +9,10 @@
 
 package com.lervar.main.system_print;
 
+import com.lervar.dialog_box.FileChoose;
 import com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintLanguages;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 import static com.lervar.main.Main.language;
@@ -37,6 +39,7 @@ public class OptionPrint implements OptionPrintLanguages {
             System.out.print(i + ".");
             System.out.println(PARTS[language][i - 1]);
         }
+        System.out.println('\n' + "C." + CHOOSE_PULLING_PATH[language]);
         chooseOption();
     }
     
@@ -54,6 +57,11 @@ public class OptionPrint implements OptionPrintLanguages {
         }
     }
     protected static void chooseOption() {
-        int optionChoice = new Scanner(System.in).nextInt();
+        String optionChoice = new Scanner(System.in).next();
+        if (Objects.equals(optionChoice, "c") || Objects.equals(optionChoice, "C")) {
+            FileChoose.fileChoose();
+        } else {
+            System.err.println("Choose option again");
+        }
     }
 }
