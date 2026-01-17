@@ -15,15 +15,15 @@ public interface SystemPrintText {
                                                    #/---------------->
                                                    /
                                                   /
-                                                 /
-                                                /
+                WWW                              /
+                WWW                             /
                WWW                             /
                WWW                            /
               WWW                            /
               WWW            MMMMM   W| WWW\u001B[31mW\u001B[0m/
              WWW           MM____MM  W^W   /\u001B[31mM\u001B[0m
-             WWW______WWW  MM        W|   /
-            LWWWWWWWWWWWW   MMMMMM^  W|  /
+             WWW______WWW  MM        W|  M/M           MMM
+            LWWWWWWWWWWWW   MMMMMM^  W|  /MM          MMM
                                         / MMM        MMM
                                        /  MMM       MMM
                                       /   MMM      MMM

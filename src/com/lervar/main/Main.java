@@ -9,6 +9,8 @@
 
 package com.lervar.main;
 
+import java.io.IOException;
+
 /**
  * >build in JDK 17.0.0<
  */
@@ -36,7 +38,7 @@ public class Main implements com.lervar.interfaces.of_lervar_output.of_system_pr
      *          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
      *                     佛祖保佑        永无BUG
      */
-    public static void main(String[] srg) {
+    public static void main(String[] srg) throws IOException {
         if (System.getProperty("os.name").toLowerCase().contains("win")) {
             System.out.print(lervarIcon_Windows);
             System.out.println("[LerVar " + lervarVersion + ']');
@@ -47,5 +49,6 @@ public class Main implements com.lervar.interfaces.of_lervar_output.of_system_pr
         System.out.print("Run in " + os + " with ");
         System.out.println(osArch);
         RunClasses.runClasses();
+        char key = (char)System.in.read();
     }
 }
