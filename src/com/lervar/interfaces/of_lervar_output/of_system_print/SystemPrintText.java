@@ -64,7 +64,7 @@ public interface SystemPrintText {
              <----------------/#
             ==========================================================================================
             """;
-    String lervarVersion = "v.pre-1.0_Beta1";
+    String lervarVersion = "v.pre-1.0_Beta2";
     String os = System.getProperty("os.name").toLowerCase();
     String osArch = System.getProperty("os.arch").toLowerCase();
 }

@@ -37,11 +37,13 @@ public class Main implements com.lervar.interfaces.of_lervar_output.of_system_pr
      *                     佛祖保佑        永无BUG
      */
     public static void main(String[] srg) {
-        if (System.getProperty("os.name").toLowerCase().contains("win"))
+        if (System.getProperty("os.name").toLowerCase().contains("win")&false) {
             System.out.print(lervarIcon_Windows);
-        else
+            System.out.println("[LerVar " + lervarVersion + ']');
+        } else {
             System.out.print(lervarIcon_Linux);
-        System.out.println("LerVar " + lervarVersion);
+            System.out.println("\u001B[33mLerVar\u001B[0m " + lervarVersion);
+        }
         System.out.print("Run in " + os + " with ");
         System.out.println(osArch);
         RunClasses.runClasses();
