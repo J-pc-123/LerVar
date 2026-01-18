@@ -31,4 +31,14 @@ public interface OptionPrintLanguages {
             "选择插件路径",
             "選擇插件路徑"
     };
+    String[] ENTER_PULLING_PATH = {
+            "Enter pulling path",
+            "输入插件路径",
+            "輸入插件路徑"
+    };
+    String[] LIST_PULLING_FILE = {
+            "Not a valid path or no plugins available",
+            "不是有效的路径或没有可用的插件",
+            "路徑無效或未找到任何插件"
+    };
 }
