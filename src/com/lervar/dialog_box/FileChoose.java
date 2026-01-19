@@ -29,14 +29,13 @@ public class FileChoose implements OptionPrintLanguages {
         filePath = new Scanner(System.in).next();
         File directory = new File(filePath);
         if (directory.exists() && directory.isDirectory()) {
-            // 列出所有文件和目录
             File[] files = directory.listFiles();
             
-            if (files != null) {
+            if (files != null && hasJarFiles(filePath)) {
                 int i = 1;
                 for (File file : files) {
                     if (file.isFile() && file.getName().endsWith(extension)) {
-                        System.out.println(i + "." + file.getName());
+                        System.out.println(i + ". " + file.getName());
                     }
                 }
             }
@@ -44,5 +43,17 @@ public class FileChoose implements OptionPrintLanguages {
             System.out.println(LIST_PULLING_FILE[language]);
             parseFilePath();
         }
+    }
+    
+    public static boolean hasJarFiles(String t_FilePath) {
+        File t_Path = new File(t_FilePath);
+        
+        if (!t_Path.exists() || !t_Path.isDirectory()) {
+            return false;
+        }
+        
+        File[] jarFiles = t_Path.listFiles((dir, name) -> name.toLowerCase().endsWith(".jar"));
+        
+        return jarFiles != null && jarFiles.length > 0;
     }
 }

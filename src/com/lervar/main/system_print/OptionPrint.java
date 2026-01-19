@@ -17,15 +17,13 @@ import java.util.Scanner;
 
 import static com.lervar.main.Main.language;
 
-/**
- * Encoding:GB18030
- */
 public class OptionPrint implements OptionPrintLanguages {
-    public static int lervarOptionCount = 10;
     public static String[] languageArray = new String[255];
-    public static String[][] options = new String[lervarOptionCount][LANGUAGE_COUNT];
+    public static String[][] tools = {
+            {"Text", "æ–‡æœ¬", "æ–‡æœ¬"}
+    };
     public static void optionPrint() {
-        languageArray = new String[]{"English(UK)", "¼òÌåÖĞÎÄ(Simplified Chinese)", "·±ówÖĞÎÄ(Traditional Chinese)"};
+        languageArray = new String[]{"English(UK)", "ç®€ä½“ä¸­æ–‡(Simplified Chinese)", "ç¹é«”ä¸­æ–‡(Traditional Chinese)"};
         int i;
         i = 1;
         for (String j : languageArray) {
@@ -35,9 +33,9 @@ public class OptionPrint implements OptionPrintLanguages {
         }
         setLanguage();
         
-        for (i = 1; i <= PARTS.length; i++) {
+        for (i = 1; i <= tools.length; i++) {
             System.out.print(i + ".");
-            System.out.println(PARTS[language][i - 1]);
+            System.out.println(tools[i - 1][language]);
         }
         System.out.println('\n' + "C." + CHOOSE_PULLING_PATH[language]);
         chooseOption();
@@ -56,10 +54,12 @@ public class OptionPrint implements OptionPrintLanguages {
             setLanguage();
         }
     }
-    protected static void chooseOption() {
+    public static void chooseOption() {
         String optionChoice = new Scanner(System.in).next();
         if (Objects.equals(optionChoice, "c") || Objects.equals(optionChoice, "C")) {
             FileChoose.fileChoose();
+        } else if (Objects.equals(optionChoice, "[num]")) {
+            System.out.println(1);
         } else {
             System.err.println("Choose option again");
         }

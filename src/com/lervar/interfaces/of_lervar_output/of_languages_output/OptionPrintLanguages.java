@@ -11,34 +11,31 @@ package com.lervar.interfaces.of_lervar_output.of_languages_output;
 
 import static com.lervar.main.system_print.OptionPrint.languageArray;
 
-/**
- * Encoding:GB18030
- */
 public interface OptionPrintLanguages {
     int LANGUAGE_COUNT = languageArray.length;
-    String[][] PARTS = {
+    String[][] OPTIONS = {
             {"Convert", "Parse", "Encrypt"},
-            {"×ª»»", "½âÎö", "¼ÓÃÜ"},
-            {"ŞD“Q", "½âÎö", "¼ÓÃÜ"}
+            {"è½¬æ¢", "è§£æ", "åŠ å¯†"},
+            {"è½‰æ›", "è§£æ", "åŠ å¯†"}
     };
     String[] CHOOSE_FILE = {
             "Choose file",
-            "Ñ¡ÔñÎÄ¼ş",
-            "ßx“ñ™n°¸"
+            "é€‰æ‹©æ–‡ä»¶",
+            "é¸æ“‡æª”æ¡ˆ"
     };
     String[] CHOOSE_PULLING_PATH = {
             "Choose pulling path",
-            "Ñ¡Ôñ²å¼şÂ·¾¶",
-            "ßx“ñ²å¼şÂ·½"
+            "é€‰æ‹©æ’ä»¶è·¯å¾„",
+            "é¸æ“‡æ’ä»¶è·¯å¾‘"
     };
     String[] ENTER_PULLING_PATH = {
             "Enter pulling path",
-            "ÊäÈë²å¼şÂ·¾¶",
-            "İ”Èë²å¼şÂ·½"
+            "è¾“å…¥æ’ä»¶è·¯å¾„",
+            "è¼¸å…¥æ’ä»¶è·¯å¾‘"
     };
     String[] LIST_PULLING_FILE = {
             "Not a valid path or no plugins available",
-            "²»ÊÇÓĞĞ§µÄÂ·¾¶»òÃ»ÓĞ¿ÉÓÃµÄ²å¼ş",
-            "Â·½ŸoĞ§»òÎ´ÕÒµ½ÈÎºÎ²å¼ş"
+            "ä¸æ˜¯æœ‰æ•ˆçš„è·¯å¾„æˆ–æ²¡æœ‰å¯ç”¨çš„æ’ä»¶",
+            "è·¯å¾‘ç„¡æ•ˆæˆ–æœªæ‰¾åˆ°ä»»ä½•æ’ä»¶"
     };
 }
