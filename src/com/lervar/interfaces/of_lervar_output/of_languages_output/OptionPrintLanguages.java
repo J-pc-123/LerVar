@@ -41,5 +41,5 @@ public interface OptionPrintLanguages {
 //            "路徑無效或未找到任何插件"
     };
     
-    String[] optionPrintLanguages(Type t);
+    String[][] optionPrintLanguages(Type t);
 }
