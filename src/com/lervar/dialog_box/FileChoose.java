@@ -11,16 +11,21 @@
 package com.lervar.dialog_box;
 
 import com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintLanguages;
+import com.lervar.main.Type;
 
 import java.io.File;
 import java.util.Scanner;
 
-import static com.lervar.main.Main.language;
+//import static com.lervar.main.Main.language;
 
 public class FileChoose implements OptionPrintLanguages {
     public static String filePath;
     public static void fileChoose() {
-        System.out.println(ENTER_PULLING_PATH[language]);
+        System.out.println(ENTER_PULLING_PATH
+                [0
+//                 language
+                ]
+        );
         parseFilePath();
     }
     
@@ -40,7 +45,7 @@ public class FileChoose implements OptionPrintLanguages {
                 }
             }
         } else {
-            System.out.println(LIST_PULLING_FILE[language]);
+//            System.out.println(LIST_PULLING_FILE[language]);
             parseFilePath();
         }
     }
@@ -55,5 +60,10 @@ public class FileChoose implements OptionPrintLanguages {
         File[] jarFiles = t_Path.listFiles((dir, name) -> name.toLowerCase().endsWith(".jar"));
         
         return jarFiles != null && jarFiles.length > 0;
+    }
+    
+    @Override
+    public String[] optionPrintLanguages(Type t) {
+        return new String[]{""};
     }
 }

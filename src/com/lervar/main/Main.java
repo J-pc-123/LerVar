@@ -36,7 +36,7 @@ public class Main {
      *          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
      *                     佛祖保佑        永无BUG
      */
-    public static byte language = 0;//'0' is English(UK), '1' is Simplified Chinese(The mainland of China; 简体中文, 中国大陆), '2' is Traditional Chinese(The HongKong, Macau, Taiwan of China; 繁體中文，中國香港，中國澳門，中國台灣)
+//    public static byte language = 0;//'0' is English(UK), '1' is Simplified Chinese(The mainland of China; 简体中文, 中国大陆), '2' is Traditional Chinese(The HongKong, Macau, Taiwan of China; 繁體中文，中國香港，中國澳門，中國台灣)
     public static void main(String[] srg) {
         RunClasses.runClasses();
         
