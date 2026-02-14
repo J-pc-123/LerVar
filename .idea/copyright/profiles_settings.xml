@@ -1,5 +1,5 @@
 <component name="CopyrightManager">
-  <settings>
+  <settings default="RunMain">
     <module2copyright>
       <element module="Project Files" copyright="LerVar" />
     </module2copyright>

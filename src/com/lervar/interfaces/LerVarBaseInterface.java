@@ -2,9 +2,8 @@
  * LerVar(v.pre-?.?_Beta?, v.release-?.?.?)
  * <p>
  * @since 2025
- * Copyright (c) 2026
- * J_pc and/or his studios
- * All rights reserved
+ * Copyright (c) 2026 J_pc and/or his studios
+ * SPDX-License-Identifier: MIT
  */
 
 package com.lervar.interfaces;

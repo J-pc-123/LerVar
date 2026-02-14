@@ -2,9 +2,8 @@
  * LerVar(v.pre-?.?_Beta?, v.release-?.?.?)
  * <p>
  * @since 2025
- * Copyright (c) 2026
- * J_pc and/or his studios
- * All rights reserved
+ * Copyright (c) 2026 J_pc and/or his studios
+ * SPDX-License-Identifier: MIT
  */
 
 package com.lervar.interfaces.of_lervar_output.of_system_print;
@@ -67,4 +66,5 @@ public interface SystemPrintText {
     String LERVAR_VERSION = "v.pre-1.0_Beta2";
     String OS = System.getProperty("os.name").toLowerCase();
     String OS_ARCH = System.getProperty("os.arch").toLowerCase();
+    String COPYRIGHT = "Copyright (c) J_pc and/or his studios";
 }
