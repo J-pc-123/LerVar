@@ -10,24 +10,25 @@
 package com.lervar.main.system_print;
 
 import com.lervar.dialog_box.FileChoose;
-import com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintLanguages;
+import com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
+import com.lervar.main.LerVarException;
 import com.lervar.main.Type;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 //import static com.lervar.main.Main.language;
 
-public class OptionPrint implements OptionPrintLanguages {
+public class OptionPrint implements OptionPrintInterface {
 //    public static String[] languageArray = new String[255];
-    public static String[]
+    public static String[][]
 //        []
         tools = {
 //            {
-              "Text"
+        {"Text"},{"text"}
 //                    "文本", "文本"}
     };
-    public static void optionPrint() {
+    public static void optionPrint() throws Exception {
+        LerVarException.tools$interfacesCannotMatchTypeExceptionInspect();
 //        languageArray = new String[]{"English(UK)", "简体中文(Simplified Chinese)", "繁體中文(Traditional Chinese)"};
         int i;
         i = 1;
@@ -38,13 +39,13 @@ public class OptionPrint implements OptionPrintLanguages {
 //        }
 //        setLanguage();
         
-        for (i = 1; i <= tools.length; i++) {
+        for (i = 1; i <= tools[0].length; i++) {
             System.out.print(i + ".");
 //            System.out.println(tools[i - 1]);
-            System.out.println(tools[0]);
+            System.out.println(tools[0][0]);
         }
 //        System.out.println('\n' + "C." + CHOOSE_PULLING_PATH[i - 1]);
-        System.out.println('\n' + "0." + CHOOSE_PULLING_PATH[0]);
+        System.out.println('\n' + "0." + CHOOSE_PULLING_PATH[0][0]);
         chooseOption();
     }
     
@@ -66,7 +67,7 @@ public class OptionPrint implements OptionPrintLanguages {
         if (optionChoice == 0) {
             FileChoose.fileChoose();
         } else if (optionChoice <= tools.length) {
-            System.out.println(1);
+            System.out.println(OPTIONS[0][0]);
         } else {
             System.err.println("Choose option again");
             chooseOption();
@@ -76,5 +77,9 @@ public class OptionPrint implements OptionPrintLanguages {
     @Override
     public String[][] optionPrintLanguages(Type t) {
         return new String[][]{{}};
+    }
+    
+    public static void initialize() {
+        tools = new String[][]{{"Text"},{"text"}};
     }
 }

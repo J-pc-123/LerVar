@@ -1,18 +1,17 @@
 /**
  * LerVar(v.pre-?.?_Beta?, v.release-?.?.?)
  * <p>
+ *
  * @since 2025
  * Copyright (c) 2026 J_pc and/or his studios
  * SPDX-License-Identifier: MIT
  * URL: https://github.com/J-pc-123/LerVar/blob/main/LICENSE
  */
 
-package com.lervar.interfaces;
+package com.lervar.main;
 
-import com.lervar.main.LerVarException;
-
-public class LerVarInterfacesException extends LerVarException {
-    public LerVarInterfacesException(Object exc) {
-        super(exc);
+public class JarFileParse {
+    public static void jarFileParse() {
+    
     }
 }

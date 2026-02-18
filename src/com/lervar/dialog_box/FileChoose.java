@@ -9,7 +9,7 @@
 
 package com.lervar.dialog_box;
 
-import com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintLanguages;
+import com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
 import com.lervar.main.Type;
 
 import java.io.File;
@@ -17,13 +17,13 @@ import java.util.Scanner;
 
 //import static com.lervar.main.Main.language;
 
-public class FileChoose implements OptionPrintLanguages {
+public class FileChoose implements OptionPrintInterface {
     public static String filePath;
     public static void fileChoose() {
         System.out.println(ENTER_PULLING_PATH
                 [0
 //                 language
-                ]
+                ][0]
         );
         parseFilePath();
     }

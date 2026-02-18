@@ -13,30 +13,30 @@ import com.lervar.main.Type;
 
 //import static com.lervar.main.system_print.OptionPrint.languageArray;
 
-public interface OptionPrintLanguages {
+public interface OptionPrintInterface {
 //    int LANGUAGE_COUNT = languageArray.length;
     String[][] OPTIONS = {
-            {"Convert", "Parse", "Encrypt"},
+            {"Convert", "Parse", "Encrypt"},{"options"}
 //            {"转换", "解析", "加密"},
 //            {"轉換", "解析", "加密"}
     };
-    String[] CHOOSE_FILE = {
-            "Choose file",
+    String[][] CHOOSE_FILE = {
+            {"Choose file"}, {"choose_file"}
 //            "选择文件",
 //            "選擇檔案"
     };
-    String[] CHOOSE_PULLING_PATH = {
-            "Choose pulling path",
+    String[][] CHOOSE_PULLING_PATH = {
+            {"Choose pulling path"}, {"choose_pulling_path"},
 //            "选择插件路径",
 //            "選擇插件路徑"
     };
-    String[] ENTER_PULLING_PATH = {
-            "Enter pulling path",
+    String[][] ENTER_PULLING_PATH = {
+            {"Enter pulling path"}, {"enter_pulling_path"},
 //            "输入插件路径",
 //            "輸入插件路徑"
     };
-    String[] LIST_PULLING_FILE = {
-            "Not a valid path or no plugins available",
+    String[][] LIST_PULLING_FILE = {
+            {"Not a valid path or no plugins available"}, {"unavailable_path"},
 //            "不是有效的路径或没有可用的插件",
 //            "路徑無效或未找到任何插件"
     };

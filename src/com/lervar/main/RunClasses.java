@@ -13,7 +13,10 @@ import com.lervar.main.system_print.OptionPrint;
 import com.lervar.main.system_print.SystemPrint;
 
 public class RunClasses {
-    public static void runClasses() {
+    public static void runClasses() throws Exception {
+        LerVarInitialize.initialize();
+        JarFileParse.jarFileParse();
+        
         SystemPrint.systemPrint();
         OptionPrint.optionPrint();
     }
