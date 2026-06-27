@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LerVar_src">
+    <output-path>$PROJECT_DIR$/../LerVar_TEST</output-path>
+    <root id="archive" name="LerVar_src.jar">
+      <element id="module-source" name="LerVar" />
+    </root>
+  </artifact>
+</component>

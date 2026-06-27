@@ -14,7 +14,12 @@ import com.lervar.main.Type;
 //import static com.lervar.main.system_print.OptionPrint.languageArray;
 
 public interface OptionPrintInterface {
+    String PLUGIN_TEXT = System.getProperty("os.name").toLowerCase().contains("win") ?
+            "\\_plugins" : "/_plugins";
 //    int LANGUAGE_COUNT = languageArray.length;
+    String[][] PATTERN = {
+        {"Static byte", "Data Stream(Beta)"},{"pattern"}
+    };
     String[][] OPTIONS = {
             {"Convert", "Parse", "Encrypt"},{"options"}
 //            {"转换", "解析", "加密"},
@@ -25,7 +30,7 @@ public interface OptionPrintInterface {
 //            "选择文件",
 //            "選擇檔案"
     };
-    String[][] CHOOSE_PULLING_PATH = {
+    String[][] CHOOSE_PLUGINS$_PATH = {
             {"Choose pulling path"}, {"choose_pulling_path"},
 //            "选择插件路径",
 //            "選擇插件路徑"

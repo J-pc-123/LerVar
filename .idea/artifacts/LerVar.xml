@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="LerVar:jar">
+  <artifact type="jar" name="LerVar">
     <output-path>$PROJECT_DIR$/../LerVar_TEST</output-path>
     <root id="archive" name="LerVar.jar">
       <element id="module-output" name="LerVar" />

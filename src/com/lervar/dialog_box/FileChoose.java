@@ -10,6 +10,7 @@
 package com.lervar.dialog_box;
 
 import com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
+import com.lervar.main.JarFileParse;
 import com.lervar.main.Type;
 
 import java.io.File;
@@ -18,7 +19,9 @@ import java.util.Scanner;
 //import static com.lervar.main.Main.language;
 
 public class FileChoose implements OptionPrintInterface {
+    public static File[] pulling;
     public static String filePath;
+    public static int fileCode;
     public static void fileChoose() {
         System.out.println(ENTER_PULLING_PATH
                 [0
@@ -34,21 +37,27 @@ public class FileChoose implements OptionPrintInterface {
         File directory = new File(filePath);
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
-            
             if (files != null && hasJarFiles(filePath)) {
                 int i = 1;
+                pulling = new File[files.length];
                 for (File file : files) {
                     if (file.isFile() && file.getName().endsWith(extension)) {
                         System.out.println(i + ". " + file.getName());
+                        pulling[i - 1] = file;
                     }
+                    i++;
                 }
             }
+            choosePulling();
         } else {
 //            System.out.println(LIST_PULLING_FILE[language]);
             parseFilePath();
         }
     }
-    
+    public static void choosePulling() {
+        fileCode = new Scanner(System.in).nextInt();
+        JarFileParse.jarFileParse();
+    }
     public static boolean hasJarFiles(String t_FilePath) {
         File t_Path = new File(t_FilePath);
         

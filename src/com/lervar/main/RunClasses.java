@@ -9,15 +9,28 @@
 
 package com.lervar.main;
 
+import com.lervar.dialog_box.FileChoose;
 import com.lervar.main.system_print.OptionPrint;
 import com.lervar.main.system_print.SystemPrint;
+
+import java.util.Scanner;
 
 public class RunClasses {
     public static void runClasses() throws Exception {
         LerVarInitialize.initialize();
-        JarFileParse.jarFileParse();
         
         SystemPrint.systemPrint();
         OptionPrint.optionPrint();
+        
+        runAgain();
+    }
+    public static void runAgain() throws Exception {
+        short r = (short) (1000 *  Math.random());
+        System.out.print("\nEnter \"" + r + "\" to run LerVar again, or enter other things to exit\n->");
+        short i = new Scanner(System.in).nextShort();
+        if (i == r) {
+            LerVarInitialize.initialize();
+            runClasses();
+        }
     }
 }

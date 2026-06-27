@@ -12,7 +12,7 @@ package com.lervar.interfaces.of_lervar_output.of_system_print;
 public interface SystemPrintText {
     String LERVAR_ICON_LINUX = """
             ==========================================================================================
-                                                   #/---------------->
+                                                   #/----------------
                                                    /
                                                   /
                 WWW                              /
@@ -20,48 +20,48 @@ public interface SystemPrintText {
                WWW                             /
                WWW                            /
               WWW                            /
-              WWW            MMMMM   W| WWW\u001B[31mW\u001B[0m/
-             WWW           MM____MM  W^W   /\u001B[31mM\u001B[0m
-             WWW______WWW  MM        W|   / MMM           MMM
-            LWWWWWWWWWWWW   MMMMMM^  W|  /  MMM          MMM
+              WWW            MMMM   WW WWW\u001B[31mW\u001B[0m /
+             WWW           MMwwwMM  W^W    \u001B[0m/\u001B[31mW\u001B[0m
+             WWW      WWW  MM       WW    / MMM           MMM
+            WWWWWWWWWWWWW   MMMMM^  WW   /  MMM          MMM
                                         /    MMM        MMM
                                        /     MMM       MMM
                                       /      MMM      MMM
                                      /        MMM    MMM
-                                    /         MMM   MMM    $WWWW$   W| WWWW
-                                   /          MMM  MMM   WW    WW   W^W    M
-                                  /            MMMMM     WW    WW   W|
-                                 /             WWWW       WWWWW WW  W|
+                                    /         MMM   MMM    WWWWW   WW WWW
+                                   /          MMM  MMM   WW   WW   W^W   W
+                                  /            MMMMM     WW   WW   WW
+                                 /             WWWW       WWWW WW  WW
                                 /
                                /
-             <----------------/#
+              ----------------/#
              ==========================================================================================
             """;
     String LERVAR_ICON_WINDOWS = """
             ==========================================================================================
-                                                   #/---------------->
+                                                   #/----------------
                                                    /
                                                   /
                 WWW                              /
                 WWW                             /
                WWW                             /
-               WWW                     File---/
+               WWW                            /
               WWW                            /
-              WWW            MMMM   W| WWW >/
-             WWW           MM___MM  W^W   W/<
-             WWW______WWW  MM       W|    / MMM           MMM
-            LWWWWWWWWWWWW   MMMMM^  W|   /  MMM          MMM
+              WWW            MMMM   WW WWW >/
+             WWW           MMwwwMM  W^W   W/<
+             WWW      WWW  MM       WW    / MMM           MMM
+            WWWWWWWWWWWWW   MMMMM^  WW   /  MMM          MMM
                                         /    MMM        MMM
                                        /     MMM       MMM
                                       /      MMM      MMM
                                      /        MMM    MMM
-                                    /         MMM   MMM    $WWW$   W| WWW
-                                   /          MMM  MMM   WW   WW   W^W   M
-                                  /            MMMMM     WW   WW   W|
-                                 /             WWWW       WWWW WW  W|
+                                    /         MMM   MMM    WWWWW   WW WWW
+                                   /          MMM  MMM   WW   WW   W^W   W
+                                  /            MMMMM     WW   WW   WW
+                                 /             WWWW       WWWW WW  WW
                                 /
                                /
-             <----------------/#
+              ----------------/#
             ==========================================================================================
             """;
     String LERVAR_VERSION = "v.pre-1.0_Beta2";
