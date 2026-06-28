@@ -43,9 +43,9 @@ public class OptionPrint implements OptionPrintInterface {
 //            i++;
 //        }
 //        setLanguage();
-        for (i = 1; i <= getJarCount(OptionPrint.class); i++) {
-            System.out.println("Installed plugins (" + getJarDirectory(OptionPrint.class) + PLUGIN_TEXT + "):");
-            System.out.println(i + ". " + getJarNames().get(i - 1));
+        System.out.println("Installed plugins (" + getJarDirectory(OptionPrint.class) + PLUGIN_TEXT + "): (Beta)");
+        for (i = 0; i <= getJarNames().size() - 1; i++) {
+            System.out.println((i + 1) + ". " + getJarNames().get(i));
         }
         System.out.println("\nChoose patterns by entering numbers:");
         for (i = 1; i <= PATTERN[0].length; i++) {
@@ -68,27 +68,27 @@ public class OptionPrint implements OptionPrintInterface {
         File jarFile = new File(getJarPath(clazz));
         return jarFile.getParent();
     }
-    public static int getJarCount(Class<?> clazz) throws URISyntaxException {
-        File dir = new File(getJarDirectory(clazz));
-        File[] jarCount = dir.listFiles();
-        if (jarCount != null) {
-            return jarCount.length;
-        }
-        return 0;
-    }
+//    public static int getJarCount(Class<?> clazz) throws URISyntaxException {
+//        File dir = new File(getJarDirectory(clazz));
+//        File[] jarCount = dir.listFiles();
+//        if (jarCount != null) {
+//            return jarCount.length;
+//        }
+//        return 0;
+//    }
     public static List<String> getJarNames() throws URISyntaxException {
         File dir = new File(getJarDirectory(OptionPrint.class) + PLUGIN_TEXT);
         File[] files =dir.listFiles();
         List<String> jarNames = new ArrayList<>();
         if (files != null) {
             for (File file : files) {
-                if (file.getName().toLowerCase().endsWith(".jar") && file.isFile()) {
+                if (file.isFile() && file.getName().toLowerCase().endsWith(".jar")) {
                     jarNames.add(file.getName());
                 }
             }
         }
         if (jarNames.isEmpty()) {
-            jarNames.add("\b\b\b<No plugin(s)>");
+            jarNames.add("\b\b\b<No plugin>");
         }
         return jarNames;
     }
@@ -108,14 +108,15 @@ public class OptionPrint implements OptionPrintInterface {
 //    }
     public static void chooseOption() {
         int optionChoice = new Scanner(System.in).nextInt();
-        if (optionChoice == 0) {
-            FileChoose.fileChoose();
-        } else if (optionChoice <= tools.length) {
+//        if (optionChoice == 0) {
+//            FileChoose.fileChoose();
+//        } else
+            if (optionChoice <= tools.length && optionChoice >= 1) {
             for (int i = 0; i <= OPTIONS.length; i++) {
                 System.out.println((i + 1) + ". " + OPTIONS[0][i]);
             }
         } else {
-            System.err.println("Choose option again");
+            System.err.println("Choose pattern again");
             chooseOption();
         }
     }
@@ -126,6 +127,6 @@ public class OptionPrint implements OptionPrintInterface {
     }
     
     public static void initialize() {
-        tools = new String[][]{{"Text"},{"text"}};
+        tools = new String[][]{{"Text"}, {"text"}};
     }
 }

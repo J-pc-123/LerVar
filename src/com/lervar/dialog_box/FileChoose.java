@@ -22,14 +22,14 @@ public class FileChoose implements OptionPrintInterface {
     public static File[] pulling;
     public static String filePath;
     public static int fileCode;
-    public static void fileChoose() {
-        System.out.println(ENTER_PULLING_PATH
-                [0
-//                 language
-                ][0]
-        );
-        parseFilePath();
-    }
+//    public static void fileChoose() {
+//        System.out.println(ENTER_PULLING_PATH
+//                [0
+////                 language
+//                ][0]
+//        );
+//        parseFilePath();
+//    }
     
     protected static void parseFilePath() {
         String extension = ".jar";

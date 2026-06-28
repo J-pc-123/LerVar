@@ -30,21 +30,21 @@ public interface OptionPrintInterface {
 //            "选择文件",
 //            "選擇檔案"
     };
-    String[][] CHOOSE_PLUGINS$_PATH = {
-            {"Choose pulling path"}, {"choose_pulling_path"},
-//            "选择插件路径",
-//            "選擇插件路徑"
-    };
-    String[][] ENTER_PULLING_PATH = {
-            {"Enter pulling path"}, {"enter_pulling_path"},
-//            "输入插件路径",
-//            "輸入插件路徑"
-    };
-    String[][] LIST_PULLING_FILE = {
-            {"Not a valid path or no plugins available"}, {"unavailable_path"},
-//            "不是有效的路径或没有可用的插件",
-//            "路徑無效或未找到任何插件"
-    };
+//    String[][] CHOOSE_PLUGINS$_PATH = {
+//            {"Choose plugins path"}, {"choose_plugins_path"},
+////            "选择插件路径",
+////            "選擇插件路徑"
+//    };
+//    String[][] ENTER_PULLING_PATH = {
+//            {"Enter pulling path"}, {"enter_pulling_path"},
+////            "输入插件路径",
+////            "輸入插件路徑"
+//    };
+//    String[][] LIST_PULLING_FILE = {
+//            {"Not a valid path or no plugins available"}, {"unavailable_path"},
+////            "不是有效的路径或没有可用的插件",
+////            "路徑無效或未找到任何插件"
+//    };
     
     String[][] optionPrintLanguages(Type t);
 }
