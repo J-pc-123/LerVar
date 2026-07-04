@@ -9,10 +9,10 @@
 
 package com.lervar.main.system_print;
 
-import com.lervar.dialog_box.FileChoose;
 import com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
 import com.lervar.main.LerVarException;
 import com.lervar.main.Type;
+import com.lervar.main.execute.LerVarExecute;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -25,6 +25,8 @@ import java.util.Scanner;
 //import static com.lervar.main.Main.language;
 
 public class OptionPrint implements OptionPrintInterface {
+    private static int patternChoice;
+    private static int optionChoice;
 //    public static String[] languageArray = new String[255];
     public static String[][]
 //        []
@@ -55,7 +57,7 @@ public class OptionPrint implements OptionPrintInterface {
         }
 //        System.out.println('\n' + "C." + CHOOSE_PLUGINS$_PATH[i - 1]);
 //        System.out.println('\n' + "0." + CHOOSE_PLUGINS$_PATH[0][0]);
-        chooseOption();
+        choosePattern();
     }
     
     public static String getJarPath(Class<?> clazz) throws URISyntaxException {
@@ -106,19 +108,29 @@ public class OptionPrint implements OptionPrintInterface {
 //            setLanguage();
 //        }
 //    }
-    public static void chooseOption() {
-        int optionChoice = new Scanner(System.in).nextInt();
+    public static void choosePattern() {
+        patternChoice = new Scanner(System.in).nextInt();
 //        if (optionChoice == 0) {
 //            FileChoose.fileChoose();
 //        } else
-            if (optionChoice <= tools.length && optionChoice >= 1) {
+        if (patternChoice <= tools.length && patternChoice >= 1) {
             for (int i = 0; i <= OPTIONS.length; i++) {
                 System.out.println((i + 1) + ". " + OPTIONS[0][i]);
             }
+            LerVarExecute._LerVarExecuteOnPATTERN();
+            optionChoice = new Scanner(System.in).nextInt();
+            LerVarExecute._LerVarExecuteOnOPTION();
         } else {
             System.err.println("Choose pattern again");
-            chooseOption();
+            choosePattern();
         }
+    }
+    
+    public static int getOptionChoice() {
+        return optionChoice;
+    }
+    public static int getPatternChoice() {
+        return patternChoice;
     }
     
     @Override
