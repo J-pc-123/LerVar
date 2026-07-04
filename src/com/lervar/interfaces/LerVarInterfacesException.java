@@ -15,7 +15,7 @@ import static com.lervar.interfaces.of_lervar_output.of_languages_output.OptionP
 
 public class LerVarInterfacesException extends LerVarException {
     public LerVarInterfacesException(Object exc) {super(exc);}
-    public static void lerVarInterfacesExceptionInspect() throws LerVarException {
+    public static void _LerVarInterfacesExceptionInspect() throws LerVarException {
         options$TypeUnidentifiedInspect();
     }
     
