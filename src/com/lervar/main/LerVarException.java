@@ -16,6 +16,7 @@ public class LerVarException extends Exception {
     public LerVarException(Object exc) {}
     
     public static void _LervarExceptionInspect() throws Exception {
+        com.lervar.interfaces.LerVarInterfacesException.lerVarInterfacesExceptionInspect();
         tools$interfacesCannotMatchTypeExceptionInspect();
     }
     public static void tools$interfacesCannotMatchTypeExceptionInspect() throws Exception {
