@@ -36,7 +36,8 @@ public class OptionPrint implements OptionPrintInterface {
 //                    "文本", "文本"}
     };
     public static void optionPrint() throws Exception {
-        LerVarException.tools$interfacesCannotMatchTypeExceptionInspect();
+//        LerVarException.tools$interfacesCannotMatchTypeExceptionInspect();
+
 //        languageArray = new String[]{"English(UK)", "简体中文(Simplified Chinese)", "繁體中文(Traditional Chinese)"};
         int i;
 //        for (String j : languageArray) {
@@ -50,8 +51,9 @@ public class OptionPrint implements OptionPrintInterface {
             System.out.println((i + 1) + ". " + getJarNames().get(i));
         }
         System.out.println("\nChoose patterns by entering numbers:");
+        System.out.println("0. <Interrupt>");
         for (i = 1; i <= PATTERN[0].length; i++) {
-            System.out.print(i + ".");
+            System.out.print(i + ". ");
 //            System.out.println(tools[i - 1]);
             System.out.println(PATTERN[0][i - 1]);
         }
@@ -113,13 +115,16 @@ public class OptionPrint implements OptionPrintInterface {
 //        if (optionChoice == 0) {
 //            FileChoose.fileChoose();
 //        } else
-        if (patternChoice <= tools.length && patternChoice >= 1) {
+        if (patternChoice >= 1 && patternChoice <= PATTERN.length) {
+            System.out.println("0. <Interrupt>");
             for (int i = 0; i <= OPTIONS.length; i++) {
                 System.out.println((i + 1) + ". " + OPTIONS[0][i]);
             }
             LerVarExecute._LerVarExecuteOnPATTERN();
             optionChoice = new Scanner(System.in).nextInt();
             LerVarExecute._LerVarExecuteOnOPTION();
+        } else if (patternChoice == 0) {
+            LerVarExecute.interrupt();
         } else {
             System.err.println("Choose pattern again");
             choosePattern();
@@ -139,6 +144,6 @@ public class OptionPrint implements OptionPrintInterface {
     }
     
     public static void initialize() {
-        tools = new String[][]{{"Text"}, {"text"}};
+//        tools = new String[][]{{"Text"}, {"text"}};
     }
 }

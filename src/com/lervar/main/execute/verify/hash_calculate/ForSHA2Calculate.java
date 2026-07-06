@@ -7,7 +7,7 @@
  * URL: https://github.com/J-pc-123/LerVar/blob/main/LICENSE
  */
 
-package com.lervar.main.execute.verification.hash_calculate;
+package com.lervar.main.execute.verify.hash_calculate;
 
-public class ForSHA3Calculate {
+public class ForSHA2Calculate {
 }

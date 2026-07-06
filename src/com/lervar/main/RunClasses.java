@@ -9,7 +9,6 @@
 
 package com.lervar.main;
 
-import com.lervar.dialog_box.FileChoose;
 import com.lervar.main.system_print.OptionPrint;
 import com.lervar.main.system_print.SystemPrint;
 

@@ -15,6 +15,9 @@ import com.lervar.main.system_print.OptionPrint;
 public class LerVarExecute {
     public static void _LerVarExecuteOnPATTERN() {
         switch (OptionPrint.getPatternChoice()) {
+        case 0:
+            LerVarExecute.interrupt();
+            break;
         case 1:
             StaticByteLerVarExecute.staticByteLerVarExecute();
             break;
@@ -27,6 +30,9 @@ public class LerVarExecute {
     }
     public static void _LerVarExecuteOnOPTION() {
         switch (OptionPrint.getOptionChoice()) {
+        case 0:
+            LerVarExecute.interrupt();
+            break;
         case 1:
             FileExecute.fileExecuteOnCONVERT();
             break;
@@ -39,5 +45,9 @@ public class LerVarExecute {
         default:
             break;
         }
+    }
+    public static void interrupt() {
+        //MUST be cited in selection statement
+        System.out.println("Was interrupted");
     }
 }
