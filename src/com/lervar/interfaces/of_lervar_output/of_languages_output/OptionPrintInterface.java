@@ -26,7 +26,7 @@ public interface OptionPrintInterface {
 //            {"轉換", "解析", "加密"}
     };
     String[][] CHOOSE_FILE = {
-            {"Choose file"}, {"choose_file"}
+            {"Enter file path"}, {"choose_file"}
 //            "选择文件",
 //            "選擇檔案"
     };

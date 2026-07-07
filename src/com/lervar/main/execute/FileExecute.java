@@ -11,18 +11,41 @@
 package com.lervar.main.execute;
 
 import com.lervar.interfaces.of_lervar_execute.ExecuteInterface;
+import com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
+import com.lervar.main.Type;
 
-public class FileExecute extends LerVarExecute implements ExecuteInterface {
+import java.util.Scanner;
+
+public class FileExecute extends LerVarExecute implements ExecuteInterface, OptionPrintInterface {
+    public static String filePath;
     //Is '0' in com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
     //Match '1' in input
-    public static void fileExecuteOnCONVERT() {}
+    public static void fileExecuteOnCONVERT() {
+        getFilePath();
+    }
     //Is '1' in com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
     //Match '2' in input
-    public static void fileExecuteOnPARSE() {}
+    public static void fileExecuteOnPARSE() {
+        getFilePath();
+        LerVarExecute._LerVarExecute(filePath);
+    }
     //Is '2' in com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
     //Match '3' in input
-    public static void fileExecuteOnENCRYPT() {}
+    public static void fileExecuteOnENCRYPT() {
+        getFilePath();
+        LerVarExecute._LerVarExecute(filePath);
+    }
+    
+    public static void getFilePath() {
+        System.out.println(CHOOSE_FILE[0][0]);
+        filePath = new Scanner(System.in).nextLine();
+    }
     
     @Override
     public void execute() {}
+    
+    @Override
+    public String[][] optionPrintLanguages(Type t) {
+        return new String[0][];
+    }
 }

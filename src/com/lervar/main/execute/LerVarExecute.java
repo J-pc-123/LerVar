@@ -12,7 +12,37 @@ package com.lervar.main.execute;
 
 import com.lervar.main.system_print.OptionPrint;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.file.Path;
+
 public class LerVarExecute {
+    public static void _LerVarExecute(String filePath) {
+        Path lerverFilePath = Path.of(filePath);
+        String s = lerverFilePath.getFileName().toString().toLowerCase();
+        String extension = s.substring((s.lastIndexOf('.')) + 1);
+        if (extension.equals("lervar")) {
+            try (RandomAccessFile raf = new RandomAccessFile(filePath, "r");) {
+                raf.seek(0);
+                int signatureLength = raf.read();
+                byte b = 0;
+                if (signatureLength < 8 || signatureLength > 127) {
+                    System.err.println("illegal file");
+                    LerVarExecute.interrupt();
+                    return;
+                }
+                while (b <= signatureLength - 1) {
+                    /////////
+                    b++;
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.err.println("illegal file");
+            LerVarExecute.interrupt();
+        }
+    }
     public static void _LerVarExecuteOnPATTERN() {
         switch (OptionPrint.getPatternChoice()) {
         case 0:
