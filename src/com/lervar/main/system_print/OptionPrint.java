@@ -134,6 +134,9 @@ public class OptionPrint implements OptionPrintInterface {
     public static int getOptionChoice() {
         return optionChoice;
     }
+    public static void setOptionChoice(int oC) {
+        optionChoice = oC;
+    }
     public static int getPatternChoice() {
         return patternChoice;
     }

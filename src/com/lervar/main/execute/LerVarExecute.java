@@ -11,22 +11,28 @@
 package com.lervar.main.execute;
 
 import com.lervar.interfaces.of_lervar_output.of_system_print.SystemPrintText;
+import com.lervar.main.execute.verify.hash_calculate.FileHashCalculate;
 import com.lervar.main.system_print.OptionPrint;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static com.lervar.main.Main._LerVarSignature;
+import static com.lervar.main.execute.verify.hash_calculate.FileHashCalculate.*;
 
 public class LerVarExecute implements SystemPrintText {
     public static void _LerVarExecute(String filePath) {
         Path lerverFilePath = Path.of(filePath);
+        File file = lerverFilePath.toFile();
         String s = lerverFilePath.getFileName().toString().toLowerCase();
         String extension = s.substring((s.lastIndexOf('.')) + 1);
         if (extension.equals("lervar")) {
-            try (RandomAccessFile raf = new RandomAccessFile(filePath, "r");) {
+            try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {
                 raf.seek(0);
                 int signatureLength = raf.read();
                 boolean bl = false;
@@ -46,7 +52,27 @@ public class LerVarExecute implements SystemPrintText {
                         }
                     }
                 }
-            } catch (IOException e) {
+                raf.seek(signatureLength + 2);
+                int getHashPattern = raf.read();
+                String hashString;
+                if (getHashPattern >= 17 && getHashPattern <= 20) {
+                    hashString = FileHashCalculate.SHACalculate("0", hashPattern[1][getHashPattern - 17]);//////////////////////
+                } else if (getHashPattern >= 33 && getHashPattern <= 36) {
+                    hashString = FileHashCalculate.SHACalculate("0", hashPattern[2][getHashPattern - 33]);
+                } else {
+                    hashString = FileHashCalculate.SHACalculate("0", hashPattern[1][2]);
+                }
+                int getHashLength = hashString.length();
+                long hashLoc = file.length() - getHashLength;
+                
+                System.out.println(getHashLength);
+                System.out.println(hashLoc);
+                System.out.println(hashString);
+                
+                raf.seek(hashLoc);
+                StringBuilder sb = new StringBuilder();
+                sb.append(raf.read(new byte[getHashLength]));/////////////////
+            } catch (IOException | NoSuchAlgorithmException e) {
                 throw new RuntimeException(e);
             }
         } else {
