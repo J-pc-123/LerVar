@@ -11,7 +11,6 @@
 package com.lervar.main.execute;
 
 import com.lervar.interfaces.of_lervar_output.of_system_print.SystemPrintText;
-import com.lervar.main.execute.verify.hash_calculate.FileHashCalculate;
 import com.lervar.main.system_print.OptionPrint;
 
 import java.io.File;
@@ -19,7 +18,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static com.lervar.main.Main._LerVarSignature;
@@ -52,26 +50,51 @@ public class LerVarExecute implements SystemPrintText {
                         }
                     }
                 }
-                raf.seek(signatureLength + 2);
+                raf.seek(signatureLength + 3);
                 int getHashPattern = raf.read();
+                StringBuilder filePart = new StringBuilder();
+                long pos = 0;
+                
+                int i = 0;
+                if (getHashPattern >= 0x21 && getHashPattern <= 0x24) {
+                    i = 1;
+                } else if (getHashPattern <= 0x10 || getHashPattern >= 0x24) {
+                    unsuitableLerVarExecute();
+                }
+                int i1 =
+                switch (getHashPattern) {
+                case 0x11| 0x21 -> 0;
+                case 0x13| 0x23 -> 2;
+                case 0x14| 0x24 -> 3;
+                default -> 1;
+                };
+                while (pos <= (file.length() - hashLengthOnByte[i][i1] - 1)) {
+                    raf.seek(pos);
+                    filePart.append((char) raf.read());
+                    pos++;
+                }
+                
                 String hashString;
                 if (getHashPattern >= 17 && getHashPattern <= 20) {
-                    hashString = FileHashCalculate.SHACalculate("0", hashPattern[1][getHashPattern - 17]);//////////////////////
+                    hashString = SHACalculateOnHex(String.valueOf(filePart), hashPattern[0][getHashPattern - 17]);//////////////////////
                 } else if (getHashPattern >= 33 && getHashPattern <= 36) {
-                    hashString = FileHashCalculate.SHACalculate("0", hashPattern[2][getHashPattern - 33]);
+                    hashString = SHACalculateOnHex(String.valueOf(filePart), hashPattern[1][getHashPattern - 33]);
                 } else {
-                    hashString = FileHashCalculate.SHACalculate("0", hashPattern[1][2]);
+                    hashString = SHACalculateOnHex(String.valueOf(filePart), hashPattern[0][1]);
                 }
-                int getHashLength = hashString.length();
+                int getHashLength = hashString.length() / 2;
                 long hashLoc = file.length() - getHashLength;
-                
-                System.out.println(getHashLength);
-                System.out.println(hashLoc);
-                System.out.println(hashString);
                 
                 raf.seek(hashLoc);
                 StringBuilder sb = new StringBuilder();
-                sb.append(raf.read(new byte[getHashLength]));/////////////////
+                pos = 1;
+                while (pos <= hashLengthOnByte[i][i1]) {
+                    sb.append(String.format("%02X", raf.read()));
+                    pos++;
+                }
+                if (!sb.toString().toLowerCase().equals(hashString)) {
+                    untrustworthyFileExecute();
+                }
             } catch (IOException | NoSuchAlgorithmException e) {
                 throw new RuntimeException(e);
             }
@@ -79,6 +102,7 @@ public class LerVarExecute implements SystemPrintText {
             illegalFileExecute();
         }
     }
+    
     public static void _LerVarExecuteOnPATTERN() {
         switch (OptionPrint.getPatternChoice()) {
         case 0:
@@ -136,10 +160,11 @@ public class LerVarExecute implements SystemPrintText {
     public static int untrustworthyFileExecute() {
         //return:
         //1 is "interrupt"; 0 is run correctly
+        int r = (int) (Math.random() * 1000 + 1);
         System.out.println(">> Untrustworthy file <<\nWhether to continue execute?");
-        System.out.println("Continue or not(Enter the number):\n0. Interrupt\n1. Continue");
-        byte b = new Scanner(System.in).nextByte();
-        if (b != 1) {
+        System.out.println("Continue or not(Enter the number):\n0. Interrupt\n" + r + ". Continue");
+        int i = new Scanner(System.in).nextInt();
+        if (i != (r)) {
             interrupt();
             return 1;
         }

@@ -15,14 +15,15 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class FileHashCalculate {
+    public static int[][] hashLengthOnByte = {{28, 32, 48, 64}, {28, 32, 48, 64}};
     public static String[][] hashPattern = {{"SHA-224", "SHA-256", "SHA-384", "SHA-512"}, {"SHA3-224", "SHA3-256", "SHA3-384", "SHA3-512"}};
-    public static String SHACalculate (String s, String algorithm) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance(algorithm);
-        return Arrays.toString(md.digest(s.getBytes(StandardCharsets.US_ASCII)));
-    }
+//    public static String SHACalculate (String s, String algorithm) throws NoSuchAlgorithmException {
+//        MessageDigest md = MessageDigest.getInstance(algorithm);
+//        return Arrays.toString(md.digest(s.getBytes(StandardCharsets.US_ASCII)));
+//    }
     public static String SHACalculateOnHex (String s, String algorithm) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance(algorithm);
-        byte[] digest = md.digest(s.getBytes(StandardCharsets.US_ASCII));
+        byte[] digest = md.digest(s.getBytes(StandardCharsets.ISO_8859_1));
         return toHex(digest);
     }
     public static String toHex(byte[] byteArray) {
