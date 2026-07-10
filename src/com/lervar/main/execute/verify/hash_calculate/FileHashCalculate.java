@@ -12,7 +12,6 @@ package com.lervar.main.execute.verify.hash_calculate;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 public class FileHashCalculate {
     public static int[][] hashLengthOnByte = {{28, 32, 48, 64}, {28, 32, 48, 64}};

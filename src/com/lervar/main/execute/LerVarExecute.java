@@ -62,9 +62,9 @@ public class LerVarExecute implements SystemPrintText {
                 }
                 int i1 =
                 switch (getHashPattern) {
-                case 0x11| 0x21 -> 0;
-                case 0x13| 0x23 -> 2;
-                case 0x14| 0x24 -> 3;
+                case 0x11, 0x21 -> 0;
+                case 0x13, 0x23 -> 2;
+                case 0x14, 0x24 -> 3;
                 default -> 1;
                 };
                 while (pos <= (file.length() - hashLengthOnByte[i][i1] - 1)) {
@@ -73,14 +73,16 @@ public class LerVarExecute implements SystemPrintText {
                     pos++;
                 }
                 
+                int fi = 0;
+                int se = 1;
                 String hashString;
-                if (getHashPattern >= 17 && getHashPattern <= 20) {
-                    hashString = SHACalculateOnHex(String.valueOf(filePart), hashPattern[0][getHashPattern - 17]);//////////////////////
-                } else if (getHashPattern >= 33 && getHashPattern <= 36) {
-                    hashString = SHACalculateOnHex(String.valueOf(filePart), hashPattern[1][getHashPattern - 33]);
-                } else {
-                    hashString = SHACalculateOnHex(String.valueOf(filePart), hashPattern[0][1]);
+                if (getHashPattern >= 0x11 && getHashPattern <= 0x14) {
+                    se = getHashPattern - 0x11;
+                } else if (getHashPattern >= 0x21 && getHashPattern <= 0x24) {
+                    fi = 1;
+                    se = getHashPattern - 0x21;
                 }
+                hashString = SHACalculateOnHex(String.valueOf(filePart), hashPattern[fi][se]);
                 int getHashLength = hashString.length() / 2;
                 long hashLoc = file.length() - getHashLength;
                 
@@ -92,6 +94,8 @@ public class LerVarExecute implements SystemPrintText {
                     pos++;
                 }
                 if (!sb.toString().toLowerCase().equals(hashString)) {
+                    System.out.println("File hash(" + hashPattern[fi][se] + ")is: " + sb.toString().toLowerCase());
+                    System.out.println("True hash(" + hashPattern[fi][se] + ")is: " + hashString);
                     untrustworthyFileExecute();
                 }
             } catch (IOException | NoSuchAlgorithmException e) {
