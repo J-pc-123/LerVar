@@ -110,7 +110,7 @@ public class OptionPrint implements OptionPrintInterface {
 //            setLanguage();
 //        }
 //    }
-    public static void choosePattern() {
+    public static void choosePattern() throws Exception {
         patternChoice = new Scanner(System.in).nextInt();
 //        if (optionChoice == 0) {
 //            FileChoose.fileChoose();

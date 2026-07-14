@@ -10,6 +10,7 @@
 package com.lervar.main.execute;
 
 import com.lervar.interfaces.of_lervar_output.of_system_print.SystemPrintText;
+import com.lervar.main.RunClasses;
 import com.lervar.main.system_print.OptionPrint;
 
 import java.io.File;
@@ -23,12 +24,17 @@ import static com.lervar.main.Main._LerVarSignature;
 import static com.lervar.main.execute.verify.hash_calculate.FileHashCalculate.*;
 
 public class LerVarExecute implements SystemPrintText {
-    public static void _LerVarExecute(String filePath) {
+    public static void _LerVarExecute(String filePath) throws Exception {
         Path lerverFilePath = Path.of(filePath);
         File file = lerverFilePath.toFile();
+        if (!file.exists()) {
+            System.err.println("Cannot find file: " + filePath);
+            interrupt();
+            RunClasses.runAgain();
+        }
         String s = lerverFilePath.getFileName().toString().toLowerCase();
         String extension = s.substring((s.lastIndexOf('.')) + 1);
-        if (extension.equals("lervar")) {
+        if (extension.equals("lervar") || extension.equals("lvr")) {
             try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {
                 raf.seek(0);
                 int signatureLength = raf.read();
@@ -121,7 +127,7 @@ public class LerVarExecute implements SystemPrintText {
             break;
         }
     }
-    public static void _LerVarExecuteOnOPTION() {
+    public static void _LerVarExecuteOnOPTION() throws Exception {
         switch (OptionPrint.getOptionChoice()) {
         case 0:
             LerVarExecute.interrupt();

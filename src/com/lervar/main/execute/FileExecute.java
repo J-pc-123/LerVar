@@ -24,13 +24,13 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
     }
     //Is '1' in com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
     //Match '2' in input
-    public static void fileExecuteOnPARSE() {
+    public static void fileExecuteOnPARSE() throws Exception {
         getFilePath();
         LerVarExecute._LerVarExecute(filePath);
     }
     //Is '2' in com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
     //Match '3' in input
-    public static void fileExecuteOnENCRYPT() {
+    public static void fileExecuteOnENCRYPT() throws Exception {
         getFilePath();
         LerVarExecute._LerVarExecute(filePath);
     }

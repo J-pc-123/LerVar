@@ -30,6 +30,8 @@ public class RunClasses {
         if (i == r) {
             LerVarInitialize.initialize();
             runClasses();
+        } else {
+            System.exit(0);
         }
     }
 }
