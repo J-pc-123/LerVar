@@ -38,9 +38,9 @@ public class LerVarExecute implements SystemPrintText {
             try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {
                 raf.seek(0);
                 int signatureLength = raf.read();
-                boolean bl = false;
+                boolean bl = true;
                 if (signatureLength < 8 || signatureLength > 127 || signatureLength != _LerVarSignature.length) {
-                    bl = (unsuitableLerVarExecute() == 0);
+                    bl = (unsuitableLerVarExecute() == 1);
                 }
                 if (bl) {
                     byte b = 1;
@@ -104,9 +104,7 @@ public class LerVarExecute implements SystemPrintText {
                     System.out.println("True hash(" + hashPattern[fi][se] + ")is: " + hashString);
                     untrustworthyFileExecute();
                 }
-            } catch (IOException | NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            }
+            } catch (IOException | NoSuchAlgorithmException ignore) {}
         } else {
             illegalFileExecute();
         }
