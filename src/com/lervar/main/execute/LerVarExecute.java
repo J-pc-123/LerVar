@@ -21,6 +21,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 import static com.lervar.main.Main._LerVarSignature;
+import static com.lervar.main.Main.compatibleWith;
 import static com.lervar.main.execute.verify.hash_calculate.FileHashCalculate.*;
 
 public class LerVarExecute implements SystemPrintText {
@@ -38,22 +39,28 @@ public class LerVarExecute implements SystemPrintText {
             try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {
                 raf.seek(0);
                 int signatureLength = raf.read();
-                boolean bl = true;
-                if (signatureLength < 8 || signatureLength > 127 || signatureLength != _LerVarSignature.length) {
-                    bl = (unsuitableLerVarExecute() == 1);
-                }
-                if (bl) {
+                if (signatureLength >= 8 && signatureLength <= 127) {
+                    StringBuilder stringBuilder = new StringBuilder();
                     byte b = 1;
-                    char c;
                     while (b <= signatureLength) {
                         raf.seek(b);
-                        c = (char) raf.read();
-                        if (c != _LerVarSignature[b - 1]) {
-                            unsuitableLerVarExecute();
-                        } else {
-                            b++;
+                        stringBuilder.append((char) raf.read());
+                        b++;
+                    }
+                    if (!stringBuilder.toString().equals(String.valueOf(_LerVarSignature))) {
+                        int i = 1;
+                        while (i <= compatibleWith.length) {
+                            if (stringBuilder.toString().equals(String.valueOf(compatibleWith[i - 1]))) {
+                                break;
+                            } else if (i <= compatibleWith.length - 1) {
+                                i++;
+                            } else {
+                                unsuitableLerVarExecute();
+                            }
                         }
                     }
+                } else {
+                    unsuitableLerVarExecute();
                 }
                 raf.seek(signatureLength + 3);
                 int getHashPattern = raf.read();
@@ -63,7 +70,7 @@ public class LerVarExecute implements SystemPrintText {
                 int i = 0;
                 if (getHashPattern >= 0x21 && getHashPattern <= 0x24) {
                     i = 1;
-                } else if (getHashPattern <= 0x10 || getHashPattern >= 0x24) {
+                } else if (getHashPattern <= 0x10 || getHashPattern >= 0x25) {
                     unsuitableLerVarExecute();
                 }
                 int i1 =
@@ -152,7 +159,7 @@ public class LerVarExecute implements SystemPrintText {
         System.err.println("illegal file");
         LerVarExecute.interrupt();
     }
-    public static int unsuitableLerVarExecute() {
+    public static void unsuitableLerVarExecute() {
         //return:
         //1 is "interrupt"; 0 is run correctly
         System.out.println(">> Unsuitable LerVar Nucleus <<\nThis file's structure is unsuitable for this LerVar version(" + LERVAR_VERSION + ") OR it's an ILLEGAL file. Whether to continue execute?");
@@ -160,11 +167,9 @@ public class LerVarExecute implements SystemPrintText {
         byte b = new Scanner(System.in).nextByte();
         if (b != 1) {
             interrupt();
-            return 1;
         }
-        return 0;
     }
-    public static int untrustworthyFileExecute() {
+    public static void untrustworthyFileExecute() {
         //return:
         //1 is "interrupt"; 0 is run correctly
         int r = (int) (Math.random() * 1000 + 1);
@@ -173,8 +178,6 @@ public class LerVarExecute implements SystemPrintText {
         int i = new Scanner(System.in).nextInt();
         if (i != (r)) {
             interrupt();
-            return 1;
         }
-        return 0;
     }
 }
