@@ -10,7 +10,6 @@
 package com.lervar.main.system_print;
 
 import com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
-import com.lervar.main.LerVarException;
 import com.lervar.main.Type;
 import com.lervar.main.execute.LerVarExecute;
 
@@ -50,16 +49,9 @@ public class OptionPrint implements OptionPrintInterface {
         for (i = 0; i <= getJarNames().size() - 1; i++) {
             System.out.println((i + 1) + ". " + getJarNames().get(i));
         }
-        System.out.println("\nChoose patterns by entering numbers:");
-        System.out.println("0. <Interrupt>");
-        for (i = 1; i <= PATTERN[0].length; i++) {
-            System.out.print(i + ". ");
-//            System.out.println(tools[i - 1]);
-            System.out.println(PATTERN[0][i - 1]);
-        }
 //        System.out.println('\n' + "C." + CHOOSE_PLUGINS$_PATH[i - 1]);
 //        System.out.println('\n' + "0." + CHOOSE_PLUGINS$_PATH[0][0]);
-        choosePattern();
+        chooseOption();
     }
     
     public static String getJarPath(Class<?> clazz) throws URISyntaxException {
@@ -110,25 +102,44 @@ public class OptionPrint implements OptionPrintInterface {
 //            setLanguage();
 //        }
 //    }
-    public static void choosePattern() throws Exception {
-        patternChoice = new Scanner(System.in).nextInt();
+    public static void chooseOption() throws Exception {
 //        if (optionChoice == 0) {
 //            FileChoose.fileChoose();
 //        } else
-        if (patternChoice >= 1 && patternChoice <= PATTERN.length) {
-            System.out.println("0. <Interrupt>");
-            for (int i = 0; i <= OPTIONS.length; i++) {
-                System.out.println((i + 1) + ". " + OPTIONS[0][i]);
-            }
-            LerVarExecute._LerVarExecuteOnPATTERN();
-            optionChoice = new Scanner(System.in).nextInt();
-            LerVarExecute._LerVarExecuteOnOPTION();
-        } else if (patternChoice == 0) {
-            LerVarExecute.interrupt();
-        } else {
-            System.err.println("Choose pattern again");
-            choosePattern();
+        System.out.println("\nChoose option by entering numbers:");
+        System.out.println("0. <Interrupt>");
+        for (int i = 0; i <= OPTIONS.length; i++) {
+            System.out.println((i + 1) + ". " + OPTIONS[0][i]);
         }
+        optionChoice = new Scanner(System.in).nextInt();
+        if (optionChoice > OPTIONS[0].length || optionChoice < 0) {
+            System.err.println("Choose option again");
+            chooseOption();
+        }
+        LerVarExecute._LerVarExecuteOnOPTION();
+//        if (patternChoice >= 1 && patternChoice <= PATTERN.length) {
+//            System.out.println("0. <Interrupt>");
+//            for (int i = 0; i <= OPTIONS.length; i++) {
+//                System.out.println((i + 1) + ". " + OPTIONS[0][i]);
+//            }
+//            LerVarExecute._LerVarExecuteOnPATTERN();
+//            optionChoice = new Scanner(System.in).nextInt();
+//            LerVarExecute._LerVarExecuteOnOPTION();
+//        } else if (patternChoice == 0) {
+//            LerVarExecute.interrupt();
+//        } else {
+//            System.err.println("Choose pattern again");
+//            choosePattern();
+//        }
+    }
+    public static void choosePattern() {
+        System.out.println("Choose pattern by entering numbers:");
+        System.out.println("0. <Interrupt>");
+        for (int i = 1; i <= PATTERN[0].length; i++) {
+            System.out.println(i + ". " + PATTERN[0][i - 1]);
+        }
+        patternChoice = new Scanner(System.in).nextInt();
+        LerVarExecute._LerVarExecuteOnPATTERN();
     }
     
     public static int getOptionChoice() {

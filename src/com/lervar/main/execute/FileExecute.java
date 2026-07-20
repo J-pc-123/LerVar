@@ -12,6 +12,7 @@ package com.lervar.main.execute;
 import com.lervar.interfaces.of_lervar_execute.ExecuteInterface;
 import com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
 import com.lervar.main.Type;
+import com.lervar.main.system_print.OptionPrint;
 
 import java.util.Scanner;
 
@@ -25,6 +26,7 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
     //Is '1' in com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
     //Match '2' in input
     public static void fileExecuteOnPARSE() throws Exception {
+        OptionPrint.choosePattern();
         getFilePath();
         LerVarExecute._LerVarExecute(filePath);
     }

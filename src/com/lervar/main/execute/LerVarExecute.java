@@ -31,7 +31,7 @@ public class LerVarExecute implements SystemPrintText {
         if (!file.exists()) {
             System.err.println("Cannot find file: " + filePath);
             interrupt();
-            RunClasses.runAgain();
+            return;
         }
         String s = lerverFilePath.getFileName().toString().toLowerCase();
         String extension = s.substring((s.lastIndexOf('.')) + 1);
