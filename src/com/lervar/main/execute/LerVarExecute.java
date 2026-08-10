@@ -10,7 +10,6 @@
 package com.lervar.main.execute;
 
 import com.lervar.interfaces.of_lervar_output.of_system_print.SystemPrintText;
-import com.lervar.main.RunClasses;
 import com.lervar.main.system_print.OptionPrint;
 
 import java.io.File;
@@ -25,7 +24,7 @@ import static com.lervar.main.Main.compatibleWith;
 import static com.lervar.main.execute.verify.hash_calculate.FileHashCalculate.*;
 
 public class LerVarExecute implements SystemPrintText {
-    public static void _LerVarExecute(String filePath) throws Exception {
+    public static void _LerVarExecute(String filePath) {
         Path lerverFilePath = Path.of(filePath);
         File file = lerverFilePath.toFile();
         if (!file.exists()) {

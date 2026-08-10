@@ -11,4 +11,6 @@ package com.lervar.main;
 
 public class Type {
     public Type(){}
+    public Type(String type){}
+    public Type(char type){}
 }
