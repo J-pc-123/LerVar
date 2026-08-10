@@ -10,6 +10,7 @@
 package com.lervar.main.execute;
 
 import com.lervar.interfaces.of_lervar_output.of_system_print.SystemPrintText;
+import com.lervar.main.RunClasses;
 import com.lervar.main.system_print.OptionPrint;
 
 import java.io.File;
@@ -24,7 +25,7 @@ import static com.lervar.main.Main.compatibleWith;
 import static com.lervar.main.execute.verify.hash_calculate.FileHashCalculate.*;
 
 public class LerVarExecute implements SystemPrintText {
-    public static void _LerVarExecute(String filePath) {
+    public static void _LerVarExecute(String filePath) throws Exception {
         Path lerverFilePath = Path.of(filePath);
         File file = lerverFilePath.toFile();
         if (!file.exists()) {
@@ -116,10 +117,10 @@ public class LerVarExecute implements SystemPrintText {
         }
     }
     
-    public static void _LerVarExecuteOnPATTERN() {
+    public static void _LerVarExecuteOnPATTERN() throws Exception {
         switch (OptionPrint.getPatternChoice()) {
         case 0:
-            LerVarExecute.interrupt();
+            interrupt();
             break;
         case 1:
             StaticByteLerVarExecute.staticByteLerVarExecute();
@@ -134,7 +135,7 @@ public class LerVarExecute implements SystemPrintText {
     public static void _LerVarExecuteOnOPTION() throws Exception {
         switch (OptionPrint.getOptionChoice()) {
         case 0:
-            LerVarExecute.interrupt();
+            interrupt();
             break;
         case 1:
             FileExecute.fileExecuteOnCONVERT();
@@ -150,15 +151,16 @@ public class LerVarExecute implements SystemPrintText {
         }
     }
     
-    public static void interrupt() {
+    public static void interrupt() throws Exception {
         //MUST be cited in selection statement
         System.out.println("Was interrupted");
+        RunClasses.runAgain();
     }
-    public static void illegalFileExecute() {
+    public static void illegalFileExecute() throws Exception {
         System.err.println("illegal file");
-        LerVarExecute.interrupt();
+        interrupt();
     }
-    public static void unsuitableLerVarExecute() {
+    public static void unsuitableLerVarExecute() throws Exception {
         //return:
         //1 is "interrupt"; 0 is run correctly
         System.out.println(">> Unsuitable LerVar Nucleus <<\nThis file's structure is unsuitable for this LerVar version(" + LERVAR_VERSION + ") OR it's an ILLEGAL file. Whether to continue execute?");
@@ -168,7 +170,7 @@ public class LerVarExecute implements SystemPrintText {
             interrupt();
         }
     }
-    public static void untrustworthyFileExecute() {
+    public static void untrustworthyFileExecute() throws Exception {
         //return:
         //1 is "interrupt"; 0 is run correctly
         int r = (int) (Math.random() * 1000 + 1);
