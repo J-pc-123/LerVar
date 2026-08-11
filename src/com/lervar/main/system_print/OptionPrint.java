@@ -132,7 +132,7 @@ public class OptionPrint implements OptionPrintInterface {
 //            choosePattern();
 //        }
     }
-    public static void choosePattern() {
+    public static void choosePattern() throws Exception {
         System.out.println("Choose pattern by entering numbers:");
         System.out.println("0. <Interrupt>");
         for (int i = 1; i <= PATTERN[0].length; i++) {
