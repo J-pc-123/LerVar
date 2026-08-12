@@ -20,13 +20,13 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
     public static String filePath;
     //Is '0' in com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
     //Match '1' in input
-    public static void fileExecuteOnCONVERT() {
+    public static void fileExecuteOnCONVERT() throws Exception {
+        OptionPrint.choosePattern();
         getFilePath();
     }
     //Is '1' in com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
     //Match '2' in input
     public static void fileExecuteOnPARSE() throws Exception {
-        OptionPrint.choosePattern();
         getFilePath();
         LerVarExecute._LerVarExecute(filePath);
     }
