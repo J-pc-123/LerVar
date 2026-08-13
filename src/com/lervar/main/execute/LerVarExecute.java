@@ -117,7 +117,7 @@ public class LerVarExecute implements SystemPrintText {
         }
     }
     
-    public static void _LerVarExecuteOnPATTERN() throws Exception {
+    public static void _LerVarExecuteOnPATTERN() {
         switch (OptionPrint.getPatternChoice()) {
         case 0:
             interrupt();
@@ -151,16 +151,15 @@ public class LerVarExecute implements SystemPrintText {
         }
     }
     
-    public static void interrupt() throws Exception {
+    public static void interrupt() {
         //MUST be cited in selection statement
         System.out.println("Was interrupted");
-        RunClasses.runAgain();
     }
-    public static void illegalFileExecute() throws Exception {
+    public static void illegalFileExecute() {
         System.err.println("illegal file");
         interrupt();
     }
-    public static void unsuitableLerVarExecute() throws Exception {
+    public static void unsuitableLerVarExecute() {
         //return:
         //1 is "interrupt"; 0 is run correctly
         System.out.println(">> Unsuitable LerVar Nucleus <<\nThis file's structure is unsuitable for this LerVar version(" + LERVAR_VERSION + ") OR it's an ILLEGAL file. Whether to continue execute?");

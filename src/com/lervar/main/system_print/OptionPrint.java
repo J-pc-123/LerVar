@@ -26,6 +26,7 @@ import java.util.Scanner;
 public class OptionPrint implements OptionPrintInterface {
     private static int patternChoice;
     private static int optionChoice;
+    public static String fileCreatePath;
 //    public static String[] languageArray = new String[255];
     public static String[][]
 //        []
@@ -139,6 +140,8 @@ public class OptionPrint implements OptionPrintInterface {
             System.out.println(i + ". " + PATTERN[0][i - 1]);
         }
         patternChoice = new Scanner(System.in).nextInt();
+        System.out.print("Create LerVar file to(Enter \"0\" to create file in original location, or enter a path to create the file into):\n->");
+        fileCreatePath = new Scanner(System.in).nextLine();
         LerVarExecute._LerVarExecuteOnPATTERN();
     }
     

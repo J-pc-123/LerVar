@@ -14,7 +14,9 @@ import com.lervar.interfaces.of_lervar_execute.ExecuteInterface;
 //Is '0' in com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
 //Match '1' in input
 public class StaticByteLerVarExecute extends LerVarExecute implements ExecuteInterface {
-    public static void staticByteLerVarExecute() {}
+    public static void staticByteLerVarExecute() {
+    
+    }
     
     @Override
     public void execute() {
