@@ -133,13 +133,17 @@ public class OptionPrint implements OptionPrintInterface {
 //            choosePattern();
 //        }
     }
-    public static void choosePattern() throws Exception {
+    public static void choosePattern() {
         System.out.println("Choose pattern by entering numbers:");
         System.out.println("0. <Interrupt>");
         for (int i = 1; i <= PATTERN[0].length; i++) {
             System.out.println(i + ". " + PATTERN[0][i - 1]);
         }
         patternChoice = new Scanner(System.in).nextInt();
+        if (patternChoice == 0) {
+            LerVarExecute.interrupt();
+            return;
+        }
         System.out.print("Create LerVar file to(Enter \"0\" to create file in original location, or enter a path to create the file into):\n->");
         fileCreatePath = new Scanner(System.in).nextLine();
         LerVarExecute._LerVarExecuteOnPATTERN();

@@ -9,10 +9,12 @@
 
 package com.lervar.main;
 
+import com.lervar.main.execute.FileExecute;
 import com.lervar.main.system_print.OptionPrint;
 
 public class LerVarInitialize {
     public static void initialize() {
         OptionPrint.initialize();
+        FileExecute.initialize();
     }
 }

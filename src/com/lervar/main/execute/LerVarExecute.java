@@ -10,7 +10,6 @@
 package com.lervar.main.execute;
 
 import com.lervar.interfaces.of_lervar_output.of_system_print.SystemPrintText;
-import com.lervar.main.RunClasses;
 import com.lervar.main.system_print.OptionPrint;
 
 import java.io.File;
@@ -75,10 +74,10 @@ public class LerVarExecute implements SystemPrintText {
                 }
                 int i1 =
                 switch (getHashPattern) {
-                case 0x11, 0x21 -> 0;
-                case 0x13, 0x23 -> 2;
-                case 0x14, 0x24 -> 3;
-                default -> 1;
+                    case 0x11, 0x21 -> 0;
+                    case 0x13, 0x23 -> 2;
+                    case 0x14, 0x24 -> 3;
+                    default -> 1;
                 };
                 while (pos <= (file.length() - hashLengthOnByte[i][i1] - 1)) {
                     raf.seek(pos);
@@ -119,9 +118,6 @@ public class LerVarExecute implements SystemPrintText {
     
     public static void _LerVarExecuteOnPATTERN() {
         switch (OptionPrint.getPatternChoice()) {
-        case 0:
-            interrupt();
-            break;
         case 1:
             StaticByteLerVarExecute.staticByteLerVarExecute();
             break;
