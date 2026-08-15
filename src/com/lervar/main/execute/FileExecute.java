@@ -23,6 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import static com.lervar.main.Main._LerVarSignature;
 import static com.lervar.main.Main._LerVarSignatureByte;
 import static com.lervar.main.system_print.OptionPrint.fileCreatePath;
 
@@ -131,12 +132,13 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
             };
         }
         try (FileOutputStream fileOutputStream = new FileOutputStream(_LerVarfile)) {
+            fileOutputStream.write((byte) _LerVarSignature.length);
             fileOutputStream.write(_LerVarSignatureByte);
             fileOutputStream.write(encrypt);
             fileOutputStream.write(checkCode);
             fileOutputStream.write(hash);
             fileOutputStream.write(fileType[0]);
-            if (fileType[0] == 0xFF) {
+            if (fileType[0] != 0xFF) {
                 fileOutputStream.write(fileType[1]);
                 for (int fhd : fileHeadData) {
                     fileOutputStream.write(fhd);
