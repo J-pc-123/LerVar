@@ -21,7 +21,7 @@ import java.util.Scanner;
 
 import static com.lervar.main.Main._LerVarSignature;
 import static com.lervar.main.Main.compatibleWith;
-import static com.lervar.main.execute.verify.hash_calculate.FileHashCalculate.*;
+import static com.lervar.main.execute.verify.file_verify.hash_calculate.FileHashCalculate.*;
 
 public class LerVarExecute implements SystemPrintText {
     public static void _LerVarExecute(String filePath) throws Exception {

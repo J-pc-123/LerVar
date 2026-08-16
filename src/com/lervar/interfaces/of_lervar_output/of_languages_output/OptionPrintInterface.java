@@ -30,6 +30,9 @@ public interface OptionPrintInterface {
 //            "选择文件",
 //            "選擇檔案"
     };
+    String[][] CHOOSE_VERIFY_CODE = {
+            {"<No verify code>", "CRC32"}, {"choose_verify_code"}
+    };
 //    String[][] CHOOSE_PLUGINS$_PATH = {
 //            {"Choose plugins path"}, {"choose_plugins_path"},
 ////            "选择插件路径",
