@@ -21,7 +21,8 @@ import java.util.Scanner;
 
 import static com.lervar.main.Main._LerVarSignature;
 import static com.lervar.main.Main.compatibleWith;
-import static com.lervar.main.execute.verify.hash_calculate.FileHashCalculate.*;
+import static com.lervar.main.RunClasses.runnable;
+import static com.lervar.main.execute.verify.file_verify.hash_calculate.FileHashCalculate.*;
 
 public class LerVarExecute implements SystemPrintText {
     public static void _LerVarExecute(String filePath) throws Exception {
@@ -150,6 +151,7 @@ public class LerVarExecute implements SystemPrintText {
     public static void interrupt() {
         //MUST be cited in selection statement
         System.out.println("Was interrupted");
+        runnable = false;
     }
     public static void illegalFileExecute() {
         System.err.println("illegal file");

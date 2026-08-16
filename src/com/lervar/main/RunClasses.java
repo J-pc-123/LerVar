@@ -15,6 +15,7 @@ import com.lervar.main.system_print.SystemPrint;
 import java.util.Scanner;
 
 public class RunClasses {
+    public static volatile boolean runnable = true;
     public static void runClasses() throws Exception {
         LerVarInitialize.initialize();
         

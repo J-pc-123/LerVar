@@ -7,7 +7,7 @@
  * URL: https://github.com/J-pc-123/LerVar/blob/main/LICENSE
  */
 
-package com.lervar.main.execute.verify.hash_calculate;
+package com.lervar.main.execute.verify.file_verify.hash_calculate;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

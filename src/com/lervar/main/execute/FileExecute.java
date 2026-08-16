@@ -27,11 +27,12 @@ import static com.lervar.main.Main._LerVarSignature;
 import static com.lervar.main.Main._LerVarSignatureByte;
 import static com.lervar.main.system_print.OptionPrint.fileCreatePath;
 
-public class FileExecute extends LerVarExecute implements ExecuteInterface, OptionPrintInterface {
+public class FileExecute extends LerVarExecute implements ExecuteInterface, OptionPrintInterface, Runnable {
     public static String filePath;
+    public static File _LerVarfile;
     public static byte encrypt = 0x00;
     public static int hash = 0x12;
-    public static int checkCode = 0xFF;
+    public static int verifyCode = 0xFF;
     public static int[] fileType = new int[2];
     public static int[] fileHeadData = new int[]{};
     public static int fileEncode = 0xFF;
@@ -74,21 +75,15 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
             System.err.println("Cannot find file: " + filePath);
             LerVarExecute.interrupt();
             return;
+        } else if (!Files.isWritable(lerverFilePath)) {
+            System.err.println("Haven't write permission: " + filePath);
+            LerVarExecute.interrupt();
+            return;
         }
         String s = lerverFilePath.getFileName().toString().toLowerCase();
         String extension = s.substring((s.lastIndexOf('.')) + 1);
         switch (extension) {
             case "java":
-                System.out.println("Is java source file, Choose compression mode:\n1. Maximum compression\n2. High preserve");
-                int mode = new Scanner(System.in).nextInt();
-                if (mode == 1) {
-                    compressionMode = 0x01;
-                } else if (mode == 2) {
-                    compressionMode = 0x02;
-                } else {
-                    interrupt();
-                    return;
-                }
                 fileType[0] = 0x00;
                 fileType[1] = 0x01;
                 fileHeadData = new int[]{};
@@ -103,14 +98,20 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
     }
     
     public static void _LerVarFileHeadWriter() throws Exception {
-        File _LerVarfile = new File(String.valueOf(fileCreate("lvr")));
-        System.out.println("Choose check/checksum code:\n0. <Interrupt>\n1. <No check code>\nOther. <No check code>");
-        String checkCodeChoice = new Scanner(System.in).nextLine();
-        if (checkCodeChoice.equals("0")) {
+        _LerVarfile = new File(String.valueOf(fileCreate("lvr")));
+        System.out.println("Choose check/checksum code:\n0. <Interrupt>");
+        for (int i = 0; i <= CHOOSE_VERIFY_CODE[0].length - 1; i++) {
+            System.out.println((i + 1) + ". " + CHOOSE_VERIFY_CODE[0][i]);
+        }
+        int verifyCodeChoice = new Scanner(System.in).nextInt();
+        if (verifyCodeChoice == 0) {
             interrupt();
+            return;
         } else {
-            checkCode =
-            switch (checkCodeChoice) {
+            verifyCode =
+            switch (verifyCodeChoice) {
+                case 2 -> 0x01;
+                case 3 -> 0x02;
                 default -> 0xFF;
             };
         }
@@ -118,6 +119,7 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
         String hashChoice = new Scanner(System.in).nextLine();
         if (hashChoice.equals("0")) {
             interrupt();
+            return;
         } else {
             hash =
             switch (hashChoice) {
@@ -135,7 +137,7 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
             fileOutputStream.write((byte) _LerVarSignature.length);
             fileOutputStream.write(_LerVarSignatureByte);
             fileOutputStream.write(encrypt);
-            fileOutputStream.write(checkCode);
+            fileOutputStream.write(verifyCode);
             fileOutputStream.write(hash);
             fileOutputStream.write(fileType[0]);
             if (fileType[0] != 0xFF) {
@@ -156,21 +158,24 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
             filePath = filePath + '\\';
         }
         if (fileCreatePath.equals("0")) {
-            path = Paths.get(filePath);
+            path = Paths.get((filePath));
         } else {
             path = Paths.get(fileCreatePath);
         }
-        try {
-            Files.createFile(path);
-        } catch (FileAlreadyExistsException e) {
-            System.out.println("The file was exist in this path");
+        if ((path.getParent()).resolve(getFileName() + '.' + ext).toFile().exists()) {
+            System.err.println("The file was exist in this path");
             interrupt();
+            return null;
+        } else {
+            try {
+                Files.createFile(path);
+            } catch (FileAlreadyExistsException ignore) {}
+            return (path.getParent()).resolve(getFileName() + '.' + ext);
         }
-        return (path.getParent()).resolve(getFileName() + '.' + ext);
     }
     public static void checkPath() {
         if (!Files.exists(Paths.get(filePath))) {
-            System.out.print("The path didn't exist, please enter path again\n->");
+            System.err.print("The path didn't exist, please enter path again\n->");
             filePath = new Scanner(System.in).nextLine();
             checkPath();
         }
@@ -197,5 +202,10 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
     @Override
     public String[][] optionPrintLanguages(Type t) {
         return new String[0][];
+    }
+    
+    @Override
+    public void run() {
+    
     }
 }
