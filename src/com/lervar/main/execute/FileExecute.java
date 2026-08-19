@@ -76,10 +76,6 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
             System.err.println("Cannot find file: " + filePath);
             LerVarExecute.interrupt();
             return;
-        } else if (!Files.isWritable(lerverFilePath)) {
-            System.err.println("Haven't write permission: " + filePath);
-            LerVarExecute.interrupt();
-            return;
         }
         String s = lerverFilePath.getFileName().toString().toLowerCase();
         String extension = s.substring((s.lastIndexOf('.')) + 1);
@@ -166,16 +162,19 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
         } else {
             path = Paths.get(fileCreatePath);
         }
-        if ((path.getParent()).resolve(getFileName() + '.' + ext).toFile().exists()) {
+        if ((path.getParent() == null ? path : path.getParent()).resolve(getFileName() + '.' + ext).toFile().exists()) {
             System.err.println("The file was exist in this path");
             interrupt();
             return null;
-        } else {
+        } else if (Files.isWritable(Path.of(fileCreatePath))) {
             try {
                 Files.createFile(path);
             } catch (FileAlreadyExistsException ignore) {}
-            return (path.getParent()).resolve(getFileName() + '.' + ext);
+            return ((path.getParent() == null ? path : path.getParent())).resolve(getFileName() + '.' + ext);
+        } else if (!Files.isWritable(Path.of(fileCreatePath))) {
+            System.err.println("Haven't write permission: " + fileCreatePath);
         }
+        return (path.getParent() == null ? path : path.getParent()).resolve(getFileName() + '.' + ext);
     }
     public static void checkPath() {
         if (!Files.exists(Paths.get(filePath))) {

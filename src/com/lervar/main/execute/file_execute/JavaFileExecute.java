@@ -47,6 +47,7 @@ public class JavaFileExecute implements JavaFileExecuteInterface {
                     while (!isText && !(randomAccessFile.read() == '\n' || randomAccessFile.read() == '\r' || randomAccessFile.read() == '\t' || randomAccessFile.read() == ' ')) {
                         stringBuilder.append(randomAccessFile.read());
                     }
+                    
                 }
                 if (true) {}
             }
