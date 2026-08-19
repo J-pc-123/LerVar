@@ -16,8 +16,9 @@ import java.io.InputStream;
 import java.util.zip.*;
 
 abstract public class VerifyCodeCalculate {
-    public static final Object[] verifier = {new CRC32(), new Adler32()};
+    public static final Object[] verifier = {new CRC32(), new CRC32C(), new Adler32()};
     public static Checksum verify;
+    //i: 0 is CRC32; 1 is CRC32C; 2 is Adler32()
     public static long verifyCalculator(int i, String filePath) {
         verify = (Checksum) verifier[i];
         try (InputStream inputStream = new FileInputStream(filePath)) {

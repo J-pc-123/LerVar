@@ -25,6 +25,7 @@ import java.util.Scanner;
 
 import static com.lervar.main.Main._LerVarSignature;
 import static com.lervar.main.Main._LerVarSignatureByte;
+import static com.lervar.main.RunClasses.runnable;
 import static com.lervar.main.system_print.OptionPrint.fileCreatePath;
 
 public class FileExecute extends LerVarExecute implements ExecuteInterface, OptionPrintInterface, Runnable {
@@ -88,10 +89,12 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
                 fileType[1] = 0x01;
                 fileHeadData = new int[]{};
                 JavaFileExecute.javaFileExecuteOfConvert();
+                break;
             case "jar":
                 fileType[0] = 0x00;
                 fileType[1] = 0x02;
                 fileHeadData = new int[]{};
+                break;
             default:
                 LerVarExecute.illegalFileExecute();
         }
@@ -99,6 +102,9 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
     
     public static void _LerVarFileHeadWriter() throws Exception {
         _LerVarfile = new File(String.valueOf(fileCreate("lvr")));
+        if (!runnable) {
+            return;
+        }
         System.out.println("Choose check/checksum code:\n0. <Interrupt>");
         for (int i = 0; i <= CHOOSE_VERIFY_CODE[0].length - 1; i++) {
             System.out.println((i + 1) + ". " + CHOOSE_VERIFY_CODE[0][i]);
@@ -154,9 +160,7 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
     public static Path fileCreate(String ext) throws Exception {
         Path path;
         checkPath();
-        if (!filePath.endsWith("\\")) {
-            filePath = filePath + '\\';
-        }
+        filePath = String.valueOf(Paths.get(filePath));
         if (fileCreatePath.equals("0")) {
             path = Paths.get((filePath));
         } else {

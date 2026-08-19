@@ -12,8 +12,11 @@ package com.lervar.main;
 import com.lervar.main.execute.FileExecute;
 import com.lervar.main.system_print.OptionPrint;
 
+import static com.lervar.main.RunClasses.runnable;
+
 public class LerVarInitialize {
     public static void initialize() {
+        runnable = true;
         OptionPrint.initialize();
         FileExecute.initialize();
     }
