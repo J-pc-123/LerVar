@@ -29,7 +29,7 @@ import static com.lervar.main.RunClasses.runnable;
 import static com.lervar.main.system_print.OptionPrint.fileCreatePath;
 
 public class FileExecute extends LerVarExecute implements ExecuteInterface, OptionPrintInterface, Runnable {
-    public static String filePath;
+    public static String filePath;//source file
     public static File _LerVarfile;
     public static byte encrypt = 0x00;
     public static int hash = 0x12;
@@ -208,7 +208,5 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
     }
     
     @Override
-    public void run() {
-    
-    }
+    public void run() {}
 }

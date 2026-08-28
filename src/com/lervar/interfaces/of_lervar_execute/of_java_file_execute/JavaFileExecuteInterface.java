@@ -15,7 +15,7 @@ import static com.lervar.main.execute.file_execute.JavaFileExecute.mainMethodArr
 
 public interface JavaFileExecuteInterface {
     Object[][] javaFileContentMap = {
-           {END, 0x00},
+           {EMPTY, 0x00},
            {mainMethodArrayIdentifier, 0x01},
            {EMPTY, 0x02},
            {EMPTY, 0x03},
@@ -30,7 +30,7 @@ public interface JavaFileExecuteInterface {
            {EMPTY, 0x0C},
            {EMPTY, 0x0D},
            {EMPTY, 0x0E},
-           {EMPTY, 0x0F},
+           {END, 0x0F},
            {EMPTY, 0x10},
            {EMPTY, 0x11},
            {EMPTY, 0x12},
@@ -227,12 +227,12 @@ public interface JavaFileExecuteInterface {
            {isText, 0xD1},
            {isFormatCode, 0xD2},
            {isRegularExpression, 0xD3},
-           {EMPTY, 0xD4},
-           {EMPTY, 0xD5},
-           {EMPTY, 0xD6},
-           {EMPTY, 0xD7},
-           {EMPTY, 0xD8},
-           {EMPTY, 0xD9},
+           {isStatementGroup, 0xD4},
+           {_double, 0xD5},
+           {triple, 0xD6},
+           {quadruple, 0xD7},
+           {quintuple, 0xD8},
+           {tenfold, 0xD9},
            {EMPTY, 0xDA},
            {EMPTY, 0xDB},
            {EMPTY, 0xDC},
@@ -247,8 +247,8 @@ public interface JavaFileExecuteInterface {
            {'\'', 0xE5},
            {'\"', 0xE6},
            {'\\', 0xE7},
-           {"\\u", 0xE8},
-           {EMPTY, 0xE9},
+           {"\0", 0xE8},
+           {"\\u", 0xE9},
            {EMPTY, 0xEA},
            {EMPTY, 0xEB},
            {EMPTY, 0xEC},
@@ -496,4 +496,6 @@ public interface JavaFileExecuteInterface {
            {EMPTY, 0xF0EE},
            {EMPTY, 0xF0EF}
     };
+    Object[][] javaFileContentMapExtend = new Object[3600][2];//Start by 0xF100; End by 0xFFEF
+    Object[][] javaFileContentMap3ByteExtend = new Object[61440][2];//Start by 0xF0F000; End by 0xFFFFEF
 }

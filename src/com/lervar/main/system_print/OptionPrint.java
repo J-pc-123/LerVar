@@ -10,6 +10,7 @@
 package com.lervar.main.system_print;
 
 import com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
+import com.lervar.interfaces.of_lervar_output.of_system_print.SystemPrintText;
 import com.lervar.main.Type;
 import com.lervar.main.execute.LerVarExecute;
 
@@ -23,7 +24,7 @@ import java.util.Scanner;
 
 //import static com.lervar.main.Main.language;
 
-public class OptionPrint implements OptionPrintInterface {
+public class OptionPrint implements OptionPrintInterface, SystemPrintText {
     private static int patternChoice;
     private static int optionChoice;
     public static String fileCreatePath;
@@ -112,8 +113,11 @@ public class OptionPrint implements OptionPrintInterface {
         for (int i = 0; i <= OPTIONS.length; i++) {
             System.out.println((i + 1) + ". " + OPTIONS[0][i]);
         }
+        System.out.println("999. <Information>");
         optionChoice = new Scanner(System.in).nextInt();
-        if (optionChoice > OPTIONS[0].length || optionChoice < 0) {
+        if (optionChoice == 999) {
+            System.out.print(System.getProperty("os.name").toLowerCase().contains("win") ? LERVAR_INFO_WINDOWS : LERVAR_INFO_LINUX);
+        } else if (optionChoice > OPTIONS[0].length || optionChoice < 0) {
             System.err.println("Choose option again");
             chooseOption();
         }
