@@ -17,6 +17,7 @@ import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.lervar.main.RunClasses.runnable;
 import static com.lervar.main.Type.*;
@@ -36,6 +37,7 @@ public class JavaFileExecute implements JavaFileExecuteInterface {
     public static int squareBracketsCount = 0;
     public static int parenthesesCount = 0;
     public static int angleBracketsCount = 0;
+    public static boolean isFullyQualifiedName = false;
     public static void javaFileExecuteOfConvert() throws Exception {
         if (!runnable) {
             return;
@@ -130,13 +132,17 @@ public class JavaFileExecute implements JavaFileExecuteInterface {
                 }
                 stringBuilder.append(statement.charAt(i));
             } else {
+                if (Pattern.compile("[.].").matcher(String.valueOf(statement)).matches()) {
+                    isFullyQualifiedName = true;
+                }
                 try (RandomAccessFile raf = new RandomAccessFile(_LerVarfile, "rw")) {
                     for (int j = 0; j <= javaFileContentMap.length - 1; j++) {
-                        if (String.valueOf(stringBuilder).equals(javaFileContentMap[j][0])) {
+                        if (String.valueOf(stringBuilder)
+                                .equals(String.valueOf(javaFileContentMap[j][0])
+                                .substring(String.valueOf(javaFileContentMap[j][0]).lastIndexOf('.') + 1))) {
                             raf.writeLong((long) javaFileContentMap[j][1]);
                             break;
-                        }
-                        if (javaFileContentMap[0xF0][0] == EMPTY){
+                        } else if (javaFileContentMap[0xF0][0] == EMPTY){
                             for (int k = 479; k >= 0xEF; k--) {
                                 if (javaFileContentMap[k][0] == EMPTY) {
                                     javaFileContentMap[mapPointer][0] = String.valueOf(stringBuilder);
@@ -155,8 +161,8 @@ public class JavaFileExecute implements JavaFileExecuteInterface {
                             break;
                         } else {
                             mapPointer = 61439;
-                            for (int k = 61439; k >= 0; k--) {
-                                if (javaFileContentMap3ByteExtend[k][0] == EMPTY) {
+                            for (; mapPointer >= 0; mapPointer--) {
+                                if (javaFileContentMap3ByteExtend[mapPointer][0] == EMPTY) {
                                     javaFileContentMap3ByteExtend[mapPointer][0] = String.valueOf(stringBuilder);
                                     --mapPointer;
                                 }
@@ -183,6 +189,41 @@ public class JavaFileExecute implements JavaFileExecuteInterface {
         FileExecute._LerVarFileHeadWriter();
     }
     public static void initialize() {
-    
+        mainMethodArrayIdentifier = "arg";
+        mapPointer = 479;
+        fileBytePointer = 0;
+        isSingleLineNote = true;
+        isText = false;
+        isGeneric = false;
+        statement = new StringBuilder();
+        contentEnd = false;
+        curlyBracketsCount = 0;
+        squareBracketsCount = 0;
+        parenthesesCount = 0;
+        angleBracketsCount = 0;
+        isFullyQualifiedName = false;
+        
+        for (int i = 2; i <= 0x1F; i++) {
+            javaFileContentMap[i][0] = EMPTY;}
+        javaFileContentMap[0x01][0] = mainMethodArrayIdentifier;
+        javaFileContentMap[0x0F][0] = END;
+        javaFileContentMap[0x8F][0] = EMPTY;
+        for (int i = 0x93; i <= 0x9F; i++) {
+            javaFileContentMap[i][0] = EMPTY;}
+        for (int i = 0xB6; i <= 0xBF; i++) {
+            javaFileContentMap[i][0] = EMPTY;}
+        javaFileContentMap[0xCE][0] = EMPTY;
+        javaFileContentMap[0xCF][0] = EMPTY;
+        for (int i = 0xDA; i <= 0xDF; i++) {
+            javaFileContentMap[i][0] = EMPTY;}
+        for (int i = 0xEA; i <= 0xEF; i++) {
+            javaFileContentMap[i][0] = EMPTY;}
+        for (int i = 0xF0; i <= 2 * 0xF0; i++) {
+            javaFileContentMap[i][0] = EMPTY;}
+        
+        for (int i = 0; i <= javaFileContentMapExtend.length - 1; i++) {
+            javaFileContentMapExtend[i][0] = EMPTY;}
+        for (int i = 0; i <= javaFileContentMap3ByteExtend.length - 1; i++) {
+            javaFileContentMap3ByteExtend[i][0] = EMPTY;}
     }
 }
