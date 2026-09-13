@@ -10,6 +10,7 @@
 package com.lervar.main;
 
 import com.lervar.main.execute.FileExecute;
+import com.lervar.main.execute.file_execute.JavaFileExecute;
 import com.lervar.main.system_print.OptionPrint;
 
 import static com.lervar.main.RunClasses.runnable;
@@ -19,5 +20,6 @@ public class LerVarInitialize {
         runnable = true;
         OptionPrint.initialize();
         FileExecute.initialize();
+        JavaFileExecute.initialize();
     }
 }
