@@ -194,6 +194,7 @@ public class JavaFileExecute implements JavaFileExecuteInterface {
             raf.seek(0);
             int i = raf.read();
             raf.seek(i + 7);
+            FileExecute.fileCreate("java");
         } catch (Exception ignore) {}
     }
     
