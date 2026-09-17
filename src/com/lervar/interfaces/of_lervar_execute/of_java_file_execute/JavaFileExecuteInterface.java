@@ -1,7 +1,6 @@
 /**
  * LerVar(v.pre-?.?_Beta?, v.release-?.?.?)
  * <p>
- *
  * @since 2025
  * Copyright (c) 2026 J_pc and/or his studios
  * SPDX-License-Identifier: MIT
@@ -15,7 +14,7 @@ import static com.lervar.main.execute.file_execute.JavaFileExecute.mainMethodArr
 
 public interface JavaFileExecuteInterface {
     Object[][] javaFileContentMap = {
-           {EMPTY, 0x00},
+           {END, 0x00},
            {mainMethodArrayIdentifier, 0x01},
            {EMPTY, 0x02},
            {EMPTY, 0x03},
@@ -30,7 +29,7 @@ public interface JavaFileExecuteInterface {
            {EMPTY, 0x0C},
            {EMPTY, 0x0D},
            {EMPTY, 0x0E},
-           {END, 0x0F},
+           {EMPTY, 0x0F},
            {EMPTY, 0x10},
            {EMPTY, 0x11},
            {EMPTY, 0x12},

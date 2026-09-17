@@ -1,7 +1,6 @@
 /**
  * LerVar(v.pre-?.?_Beta?, v.release-?.?.?)
  * <p>
- *
  * @since 2025
  * Copyright (c) 2026 J_pc and/or his studios
  * SPDX-License-Identifier: MIT
@@ -19,6 +18,7 @@ import java.nio.file.Path;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.lervar.main.Main.*;
 import static com.lervar.main.RunClasses.runnable;
 import static com.lervar.main.Type.*;
 import static com.lervar.main.execute.FileExecute.*;
@@ -188,6 +188,15 @@ public class JavaFileExecute implements JavaFileExecuteInterface {
     public static void javaJarFileExecuteOfConvert() throws Exception {
         FileExecute._LerVarFileHeadWriter();
     }
+    
+    public static void javaFileExecuteOfParse() {
+        try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {
+            raf.seek(0);
+            int i = raf.read();
+            raf.seek(i + 7);
+        } catch (Exception ignore) {}
+    }
+    
     public static void initialize() {
         mainMethodArrayIdentifier = "arg";
         mapPointer = 479;
@@ -219,7 +228,7 @@ public class JavaFileExecute implements JavaFileExecuteInterface {
         for (int i = 0xEA; i <= 0xEF; i++) {
             javaFileContentMap[i][0] = EMPTY;}
         for (int i = 0xF0; i <= 2 * 0xF0; i++) {
-            javaFileContentMap[i][0] = EMPTY;}
+            javaFileContentMap[i - 1][0] = EMPTY;}
         
         for (int i = 0; i <= javaFileContentMapExtend.length - 1; i++) {
             javaFileContentMapExtend[i][0] = EMPTY;}
