@@ -10,13 +10,17 @@
 package com.lervar.main.execute;
 
 import com.lervar.interfaces.of_lervar_execute.ExecuteInterface;
+import com.lervar.interfaces.of_lervar_execute.of_java_file_execute.of_lervar_file_structure.LerVarFileStructure;
 import com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
 import com.lervar.main.Type;
 import com.lervar.main.execute.file_execute.JavaFileExecute;
 import com.lervar.main.system_print.OptionPrint;
 
+import javax.management.StringValueExp;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.RandomAccessFile;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,7 +32,7 @@ import static com.lervar.main.Main._LerVarSignatureByte;
 import static com.lervar.main.RunClasses.runnable;
 import static com.lervar.main.system_print.OptionPrint.fileCreatePath;
 
-public class FileExecute extends LerVarExecute implements ExecuteInterface, OptionPrintInterface, Runnable {
+public class FileExecute extends LerVarExecute implements ExecuteInterface, OptionPrintInterface, Runnable, LerVarFileStructure {
     public static String filePath;//source file
     public static File _LerVarfile;
     public static byte encrypt = 0x00;
@@ -36,6 +40,7 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
     public static int verifyCode = 0xFF;
     public static int[] fileType = new int[2];
     public static int[] fileHeadData = new int[]{};
+    public static char[] fileHead = "".toCharArray();
     public static int fileEncode = 0xFF;
     public static int executePattern =
             switch(OptionPrint.getPatternChoice()) {
@@ -176,6 +181,25 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
         }
         return (path.getParent() == null ? path : path.getParent()).resolve(getFileName() + '.' + ext);
     }
+    public static void fileParse() {
+        try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {
+            raf.seek(0);
+            raf.seek(raf.read() + (int) FILE_HEAD_STRUCTURE[2][1] + (int) FILE_HEAD_STRUCTURE[3][1] + (int) FILE_HEAD_STRUCTURE[4][1] - 1);
+            fileType[0] = raf.read();
+            raf.seek(raf.read() + (int) FILE_HEAD_STRUCTURE[2][1] + (int) FILE_HEAD_STRUCTURE[3][1] + (int) FILE_HEAD_STRUCTURE[4][1]);
+            fileType[1] = raf.read();
+            StringBuilder sb = new StringBuilder(String.valueOf(fileType[0])).append(fileType[1]);
+            if (HAVE_FILE_HEAD_DATA) {////////
+            
+            } else {
+                switch (String.format("%04X", Integer.parseInt(String.valueOf(sb)))) {
+                case "0001":
+                    JavaFileExecute.javaFileExecuteOfParse();
+                }
+            }
+        } catch (Exception ignore) {}
+    }
+    
     public static void checkPath() {
         if (!Files.exists(Paths.get(filePath))) {
             System.err.print("The path didn't exist, please enter path again\n->");
@@ -195,6 +219,7 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
         fileType[0] = 0xFF;
         fileType[1] = 0x00;
         fileHeadData = new int[]{};
+        fileHead = "".toCharArray();
         fileEncode = 0x01;
         executePattern = 0xFF;
         compressionMode = 0x01;

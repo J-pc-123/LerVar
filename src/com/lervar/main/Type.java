@@ -14,7 +14,7 @@ public class Type {
     public Type(String type){}
     public Type(char type){}
     public Type(int type){}
-    public static final int END = 0x0F;
+    public static final int END = 0x00;
     public static final Object EMPTY = null;
     public static final int isIdentifier = 0xD0;
     public static final int isText = 0xD1;

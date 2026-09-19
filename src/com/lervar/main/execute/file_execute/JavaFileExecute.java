@@ -10,6 +10,7 @@
 package com.lervar.main.execute.file_execute;
 
 import com.lervar.interfaces.of_lervar_execute.of_java_file_execute.JavaFileExecuteInterface;
+import com.lervar.interfaces.of_lervar_execute.of_java_file_execute.of_lervar_file_structure.LerVarFileStructure;
 import com.lervar.main.execute.FileExecute;
 
 import java.io.RandomAccessFile;
@@ -24,7 +25,7 @@ import static com.lervar.main.Type.*;
 import static com.lervar.main.execute.FileExecute.*;
 import static com.lervar.main.execute.verify.file_verify.VerifyCodeCalculate.verifyCalculator;
 
-public class JavaFileExecute implements JavaFileExecuteInterface {
+public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStructure {
     public static String mainMethodArrayIdentifier = "arg";
     public static int mapPointer = 479;
     public static long fileBytePointer = 0;
@@ -193,9 +194,13 @@ public class JavaFileExecute implements JavaFileExecuteInterface {
         try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {
             raf.seek(0);
             int i = raf.read();
-            raf.seek(i + 7);
+            raf.seek(i + (int) FILE_HEAD_STRUCTURE[2][1] + (int) FILE_HEAD_STRUCTURE[3][1] + (int) FILE_HEAD_STRUCTURE[4][1] +
+                    (int) FILE_HEAD_STRUCTURE[5][1] + (int) FILE_HEAD_STRUCTURE[6][1] + (int) FILE_HEAD_STRUCTURE[7][1] + 1);
             FileExecute.fileCreate("java");
         } catch (Exception ignore) {}
+    }
+    public static void jarFileExecuteOfParse() {
+    
     }
     
     public static void initialize() {
