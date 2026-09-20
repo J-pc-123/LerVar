@@ -16,7 +16,6 @@ import static com.lervar.main.Main.*;
 import static com.lervar.main.execute.FileExecute.fileHeadData;
 
 public interface LerVarFileStructure {
-    boolean HAVE_FILE_HEAD_DATA = false;
     Object[
             //Structure type
     ][

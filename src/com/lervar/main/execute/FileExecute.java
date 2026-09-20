@@ -195,6 +195,8 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
                 switch (String.format("%04X", Integer.parseInt(String.valueOf(sb)))) {
                 case "0001":
                     JavaFileExecute.javaFileExecuteOfParse();
+                case "0002":
+                    JavaFileExecute.jarFileExecuteOfParse();
                 }
             }
         } catch (Exception ignore) {}
@@ -211,6 +213,26 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
         File file = new File(filePath);
         return file.getName().substring(0, file.getName().lastIndexOf('.'));
     }
+    
+//    public static int getLerVarFileHeadPointer(Type head) {
+//        int pointer = 0;
+//        for (int i = 0; i <= FILE_HEAD_STRUCTURE.length - 1; i++) {
+//            if (head.equals(FILE_HEAD_STRUCTURE[i][0])) {
+//                pointer += (int) FILE_HEAD_STRUCTURE[i][1] - 1;
+//                return pointer;
+//            } else {
+//                if (i != 1) {
+//                    pointer += (i == 0 ? signatureLength : (int) FILE_HEAD_STRUCTURE[i][1]);
+//                } else {
+//                    return signatureLength;
+//                }
+//            }
+//        }
+//        return pointer - 1;
+//    }
+//    public static int getLerVarFileHeadPointer(int head) {
+//        return 0;
+//    }
     
     public static void initialize() {
         filePath = "";

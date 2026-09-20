@@ -25,6 +25,8 @@ import static com.lervar.main.RunClasses.runnable;
 import static com.lervar.main.execute.verify.file_verify.hash_calculate.FileHashCalculate.*;
 
 public class LerVarExecute implements SystemPrintText {
+    public static int signatureLength = 8;
+    public static boolean HAVE_FILE_HEAD_DATA = false;
     public static void _LerVarExecute(String filePath) throws Exception {
         Path lerverFilePath = Path.of(filePath);
         File file = lerverFilePath.toFile();
@@ -38,7 +40,6 @@ public class LerVarExecute implements SystemPrintText {
         if (extension.equals("lervar") || extension.equals("lvr")) {
             try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {
                 raf.seek(0);
-                int signatureLength = raf.read();
                 if (signatureLength >= 8 && signatureLength <= 127) {
                     StringBuilder stringBuilder = new StringBuilder();
                     byte b = 1;
@@ -177,5 +178,9 @@ public class LerVarExecute implements SystemPrintText {
         if (i != (r)) {
             interrupt();
         }
+    }
+    public static void initialize() {
+        signatureLength = 8;
+        HAVE_FILE_HEAD_DATA = false;
     }
 }
