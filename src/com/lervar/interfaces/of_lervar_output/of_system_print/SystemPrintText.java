@@ -104,7 +104,7 @@ public interface SystemPrintText {
             -Mail to 1691365315@qq.com
              (If you don't within the Chinese mainland network, or haven't connect to the Chinese mainland network via VPN, send e-mail may be NOT a stable choice)
             """;
-    String LERVAR_VERSION = "v.pre-1.0_Beta1";
+    String LERVAR_VERSION = "v.pre-1.0_Beta2";
     String OS = System.getProperty("os.name").toLowerCase();
     String OS_ARCH = System.getProperty("os.arch").toLowerCase();
     String COPYRIGHT = "Copyright (c) 2026 J_pc and/or his studios";

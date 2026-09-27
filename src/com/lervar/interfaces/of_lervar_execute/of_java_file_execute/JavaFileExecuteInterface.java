@@ -55,7 +55,7 @@ public interface JavaFileExecuteInterface {
            {"abstract", 0x26},
            {"static", 0x27},
            {"void", 0x28},
-           {"main(String[] " + mainMethodArrayIdentifier + ")", 0x29},
+           {"static void main(String[] " + mainMethodArrayIdentifier + ")", 0x29},
            {"return", 0x2A},
            {"final", 0x2B},
            {"byte", 0x2C},
@@ -122,16 +122,16 @@ public interface JavaFileExecuteInterface {
            {"java.lang.System.in", 0x69},
            {"java.lang.System.out", 0x6A},
            {"java.lang.System.err", 0x6B},
-           {"java.io.PrintStream.print()", 0x6C},
-           {"java.io.PrintStream.println()", 0x6D},
-           {"java.io.PrintStream.printf()", 0x6E},
+           {"print()", 0x6C},//java.io.PrintStream.print()
+           {"println()", 0x6D},//java.io.PrintStream.println()
+           {"printf()", 0x6E},//java.io.PrintStream.printf()
            {"java.util.Scanner", 0x6F},
-           {"java.util.Scanner.nextLine()", 0x70},
-           {"java.util.Scanner.nextInt()", 0x71},
-           {"java.util.Scanner.nextByte()", 0x72},
-           {"java.util.Scanner.nextShort()", 0x73},
-           {"java.util.Scanner.nextLong()", 0x74},
-           {"java.util.Scanner.nextBoolean()", 0x75},
+           {"nextLine()", 0x70},//java.util.Scanner.nextLine()
+           {"nextInt()", 0x71},//java.util.Scanner.nextInt()
+           {"nextByte()", 0x72},//java.util.Scanner.nextByte()
+           {"nextShort()", 0x73},//java.util.Scanner.nextShort()
+           {"nextLong()", 0x74},//java.util.Scanner.nextLong()
+           {"nextBoolean()", 0x75},//java.util.Scanner.nextBoolean()
            {"java.lang.Number", 0x76},
            {"java.lang.Math", 0x77},
            {"java.lang.Byte", 0x78},
@@ -226,7 +226,7 @@ public interface JavaFileExecuteInterface {
            {isText, 0xD1},
            {isFormatCode, 0xD2},
            {isRegularExpression, 0xD3},
-           {isStatementGroup, 0xD4},
+           {isNumber, 0xD4},
            {_double, 0xD5},
            {triple, 0xD6},
            {quadruple, 0xD7},

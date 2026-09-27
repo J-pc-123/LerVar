@@ -170,5 +170,8 @@ public class OptionPrint implements OptionPrintInterface, SystemPrintText {
     
     public static void initialize() {
 //        tools = new String[][]{{"Text"}, {"text"}};
+        patternChoice = 0;
+        optionChoice = 0;
+        fileCreatePath = "";
     }
 }

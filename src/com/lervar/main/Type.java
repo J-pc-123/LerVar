@@ -20,7 +20,7 @@ public class Type {
     public static final int isText = 0xD1;
     public static final int isFormatCode = 0xD2;
     public static final int isRegularExpression = 0xD3;
-    public static final int isStatementGroup = 0xD4;
+    public static final int isNumber = 0xD4;
     public static final int _double = 0xD5;
     public static final int triple = 0xD6;
     public static final int quadruple = 0xD7;

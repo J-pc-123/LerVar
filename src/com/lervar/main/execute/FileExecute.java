@@ -16,9 +16,7 @@ import com.lervar.main.Type;
 import com.lervar.main.execute.file_execute.JavaFileExecute;
 import com.lervar.main.system_print.OptionPrint;
 
-import javax.management.StringValueExp;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.RandomAccessFile;
 import java.nio.file.FileAlreadyExistsException;
@@ -30,7 +28,7 @@ import java.util.Scanner;
 import static com.lervar.main.Main._LerVarSignature;
 import static com.lervar.main.Main._LerVarSignatureByte;
 import static com.lervar.main.RunClasses.runnable;
-import static com.lervar.main.system_print.OptionPrint.fileCreatePath;
+import static com.lervar.main.system_print.OptionPrint.*;
 
 public class FileExecute extends LerVarExecute implements ExecuteInterface, OptionPrintInterface, Runnable, LerVarFileStructure {
     public static String filePath;//source file
@@ -59,6 +57,7 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
     //Match '2' in input
     public static void fileExecuteOnPARSE() throws Exception {
         getFilePath();
+        fileRecognize();
         LerVarExecute._LerVarExecute(filePath);
     }
     //Is '2' in com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
@@ -84,20 +83,24 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
         }
         String s = lerverFilePath.getFileName().toString().toLowerCase();
         String extension = s.substring((s.lastIndexOf('.')) + 1);
-        switch (extension) {
-            case "java":
-                fileType[0] = 0x00;
-                fileType[1] = 0x01;
-                fileHeadData = new int[]{};
-                JavaFileExecute.javaFileExecuteOfConvert();
-                break;
-            case "jar":
-                fileType[0] = 0x00;
-                fileType[1] = 0x02;
-                fileHeadData = new int[]{};
-                break;
-            default:
-                LerVarExecute.illegalFileExecute();
+        if (getOptionChoice() == 1) {
+            switch (extension) {
+                case "java":
+                    fileType[0] = 0x00;
+                    fileType[1] = 0x01;
+                    fileHeadData = new int[]{};
+                    JavaFileExecute.javaFileExecuteOfConvert();
+                    break;
+                case "jar":
+                    fileType[0] = 0x00;
+                    fileType[1] = 0x02;
+                    fileHeadData = new int[]{};
+                    break;
+                default:
+                    LerVarExecute.illegalFileExecute();
+            }
+        } else if (getOptionChoice() == 2) {
+            fileParse();
         }
     }
     
@@ -162,18 +165,22 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
         Path path;
         checkPath();
         filePath = String.valueOf(Paths.get(filePath));
+        String s = (fileCreatePath.toCharArray()[fileCreatePath.length() - 1] == '\\' | fileCreatePath.toCharArray()[fileCreatePath.length() - 1] == '/' ? "" :
+                System.getProperty("os.name").toLowerCase().contains("win") ? "\\" : "/");
         if (fileCreatePath.equals("0")) {
-            path = Paths.get((filePath));
+            path = Path.of(Paths.get(filePath).getParent() + s + getFileName() + '.' + ext);
         } else {
+            fileCreatePath = Path.of(fileCreatePath) + s + getFileName() + '.' + ext;
             path = Paths.get(fileCreatePath);
         }
         if ((path.getParent() == null ? path : path.getParent()).resolve(getFileName() + '.' + ext).toFile().exists()) {
             System.err.println("The file was exist in this path");
             interrupt();
             return null;
-        } else if (Files.isWritable(Path.of(fileCreatePath))) {
+        } else if (Files.isWritable(path.getParent())) {
             try {
                 Files.createFile(path);
+                System.out.println("Created file in: " + path);
             } catch (FileAlreadyExistsException ignore) {}
             return ((path.getParent() == null ? path : path.getParent())).resolve(getFileName() + '.' + ext);
         } else if (!Files.isWritable(Path.of(fileCreatePath))) {
@@ -184,20 +191,25 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
     public static void fileParse() {
         try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {
             raf.seek(0);
-            raf.seek(raf.read() + (int) FILE_HEAD_STRUCTURE[2][1] + (int) FILE_HEAD_STRUCTURE[3][1] + (int) FILE_HEAD_STRUCTURE[4][1] - 1);
+            raf.seek(raf.read() + (int) FILE_HEAD_STRUCTURE[2][1] + (int) FILE_HEAD_STRUCTURE[3][1] + 1);
             fileType[0] = raf.read();
-            raf.seek(raf.read() + (int) FILE_HEAD_STRUCTURE[2][1] + (int) FILE_HEAD_STRUCTURE[3][1] + (int) FILE_HEAD_STRUCTURE[4][1]);
+            raf.seek(0);
+            raf.seek(raf.read() + (int) FILE_HEAD_STRUCTURE[2][1] + (int) FILE_HEAD_STRUCTURE[3][1] + 2);
             fileType[1] = raf.read();
-            StringBuilder sb = new StringBuilder(String.valueOf(fileType[0])).append(fileType[1]);
+            HAVE_FILE_HEAD_DATA =
+                switch (String.format("%02X", fileType[0]) + String.format("%02X", fileType[1])) {
+                case "0002"-> true;
+                default -> false;
+                };
+            
             if (HAVE_FILE_HEAD_DATA) {////////
             
-            } else {
-                switch (String.format("%04X", Integer.parseInt(String.valueOf(sb)))) {
-                case "0001":
-                    JavaFileExecute.javaFileExecuteOfParse();
-                case "0002":
-                    JavaFileExecute.jarFileExecuteOfParse();
-                }
+            }
+            switch (String.format(String.format("%02X", fileType[0]) + String.format("%02X", fileType[1]))) {
+            case "0001":
+                JavaFileExecute.javaFileExecuteOfParse();
+            case "0002":
+                JavaFileExecute.jarFileExecuteOfParse();
             }
         } catch (Exception ignore) {}
     }

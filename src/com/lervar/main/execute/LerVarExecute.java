@@ -10,6 +10,7 @@
 package com.lervar.main.execute;
 
 import com.lervar.interfaces.of_lervar_output.of_system_print.SystemPrintText;
+import com.lervar.main.execute.verify.file_verify.hash_calculate.FileHashCalculate;
 import com.lervar.main.system_print.OptionPrint;
 
 import java.io.File;
@@ -27,6 +28,7 @@ import static com.lervar.main.execute.verify.file_verify.hash_calculate.FileHash
 public class LerVarExecute implements SystemPrintText {
     public static int signatureLength = 8;
     public static boolean HAVE_FILE_HEAD_DATA = false;
+    public static int hashPattern = 1;
     public static void _LerVarExecute(String filePath) throws Exception {
         Path lerverFilePath = Path.of(filePath);
         File file = lerverFilePath.toFile();
@@ -40,6 +42,7 @@ public class LerVarExecute implements SystemPrintText {
         if (extension.equals("lervar") || extension.equals("lvr")) {
             try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {
                 raf.seek(0);
+                signatureLength = raf.read();
                 if (signatureLength >= 8 && signatureLength <= 127) {
                     StringBuilder stringBuilder = new StringBuilder();
                     byte b = 1;
@@ -64,18 +67,18 @@ public class LerVarExecute implements SystemPrintText {
                     unsuitableLerVarExecute();
                 }
                 raf.seek(signatureLength + 3);
-                int getHashPattern = raf.read();
+                hashPattern = raf.read();
                 StringBuilder filePart = new StringBuilder();
                 long pos = 0;
                 
                 int i = 0;
-                if (getHashPattern >= 0x21 && getHashPattern <= 0x24) {
+                if (hashPattern >= 0x21 && hashPattern <= 0x24) {
                     i = 1;
-                } else if (getHashPattern <= 0x10 || getHashPattern >= 0x25) {
+                } else if (hashPattern <= 0x10 || hashPattern >= 0x25) {
                     unsuitableLerVarExecute();
                 }
                 int i1 =
-                switch (getHashPattern) {
+                switch (hashPattern) {
                     case 0x11, 0x21 -> 0;
                     case 0x13, 0x23 -> 2;
                     case 0x14, 0x24 -> 3;
@@ -90,13 +93,13 @@ public class LerVarExecute implements SystemPrintText {
                 int fi = 0;
                 int se = 1;
                 String hashString;
-                if (getHashPattern >= 0x11 && getHashPattern <= 0x14) {
-                    se = getHashPattern - 0x11;
-                } else if (getHashPattern >= 0x21 && getHashPattern <= 0x24) {
+                if (hashPattern >= 0x11 && hashPattern <= 0x14) {
+                    se = hashPattern - 0x11;
+                } else if (hashPattern >= 0x21 && hashPattern <= 0x24) {
                     fi = 1;
-                    se = getHashPattern - 0x21;
+                    se = hashPattern - 0x21;
                 }
-                hashString = SHACalculateOnHex(String.valueOf(filePart), hashPattern[fi][se]);
+                hashString = SHACalculateOnHex(String.valueOf(filePart), FileHashCalculate.hashPattern[fi][se]);
                 int getHashLength = hashString.length() / 2;
                 long hashLoc = file.length() - getHashLength;
                 
@@ -108,8 +111,8 @@ public class LerVarExecute implements SystemPrintText {
                     pos++;
                 }
                 if (!sb.toString().toLowerCase().equals(hashString)) {
-                    System.out.println("File hash(" + hashPattern[fi][se] + ")is: " + sb.toString().toLowerCase());
-                    System.out.println("True hash(" + hashPattern[fi][se] + ")is: " + hashString);
+                    System.out.println("File hash(" + FileHashCalculate.hashPattern[fi][se] + ")is: " + sb.toString().toLowerCase());
+                    System.out.println("True hash(" + FileHashCalculate.hashPattern[fi][se] + ")is: " + hashString);
                     untrustworthyFileExecute();
                 }
             } catch (IOException | NoSuchAlgorithmException ignore) {}
@@ -182,5 +185,6 @@ public class LerVarExecute implements SystemPrintText {
     public static void initialize() {
         signatureLength = 8;
         HAVE_FILE_HEAD_DATA = false;
+        hashPattern = 1;
     }
 }
