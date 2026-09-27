@@ -110,9 +110,9 @@ public class LerVarExecute implements SystemPrintText {
                     sb.append(String.format("%02X", raf.read()));
                     pos++;
                 }
-                if (!sb.toString().toLowerCase().equals(hashString)) {
-                    System.out.println("File hash(" + FileHashCalculate.hashPattern[fi][se] + ")is: " + sb.toString().toLowerCase());
-                    System.out.println("True hash(" + FileHashCalculate.hashPattern[fi][se] + ")is: " + hashString);
+                if (!sb.toString().toLowerCase().equals(hashString) && runnable) {
+                    System.out.println("File hash(" + FileHashCalculate.hashPattern[fi][se] + ")is: " + sb.toString().toUpperCase());
+                    System.out.println("True hash(" + FileHashCalculate.hashPattern[fi][se] + ")is: " + hashString.toUpperCase());
                     untrustworthyFileExecute();
                 }
             } catch (IOException | NoSuchAlgorithmException ignore) {}
