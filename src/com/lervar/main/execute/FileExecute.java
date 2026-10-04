@@ -57,8 +57,8 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
     //Match '2' in input
     public static void fileExecuteOnPARSE() throws Exception {
         getFilePath();
-        fileRecognize();
         LerVarExecute._LerVarExecute(filePath);
+        fileRecognize();
     }
     //Is '2' in com.lervar.interfaces.of_lervar_output.of_languages_output.OptionPrintInterface;
     //Match '3' in input
@@ -162,31 +162,34 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
         }
     }
     public static Path fileCreate(String ext) throws Exception {
-        Path path;
-        checkPath();
-        filePath = String.valueOf(Paths.get(filePath));
-        String s = (fileCreatePath.toCharArray()[fileCreatePath.length() - 1] == '\\' | fileCreatePath.toCharArray()[fileCreatePath.length() - 1] == '/' ? "" :
-                System.getProperty("os.name").toLowerCase().contains("win") ? "\\" : "/");
-        if (fileCreatePath.equals("0")) {
-            path = Path.of(Paths.get(filePath).getParent() + s + getFileName() + '.' + ext);
-        } else {
-            fileCreatePath = Path.of(fileCreatePath) + s + getFileName() + '.' + ext;
-            path = Paths.get(fileCreatePath);
+        if (runnable) {
+            Path path;
+            checkPath();
+            filePath = String.valueOf(Paths.get(filePath));
+            String s = (fileCreatePath.toCharArray()[fileCreatePath.length() - 1] == '\\' | fileCreatePath.toCharArray()[fileCreatePath.length() - 1] == '/' ? "" :
+                    System.getProperty("os.name").toLowerCase().contains("win") ? "\\" : "/");
+            if (fileCreatePath.equals("0")) {
+                fileCreatePath = String.valueOf(path = Path.of(Paths.get(filePath).getParent() + s + getFileName() + '.' + ext));
+            } else {
+                fileCreatePath = Path.of(fileCreatePath) + s + getFileName() + '.' + ext;
+                path = Paths.get(fileCreatePath);
+            }
+            if ((path.getParent() == null ? path : path.getParent()).resolve(getFileName() + '.' + ext).toFile().exists()) {
+                System.err.println("The file was exist in this path");
+                interrupt();
+                return null;
+            } else if (Files.isWritable(path.getParent())) {
+                try {
+                    Files.createFile(path);
+                    System.out.println("Created file in: " + path);
+                } catch (FileAlreadyExistsException ignore) {}
+                return ((path.getParent() == null ? path : path.getParent())).resolve(getFileName() + '.' + ext);
+            } else if (!Files.isWritable(Path.of(fileCreatePath))) {
+                System.err.println("Haven't write permission: " + fileCreatePath);
+            }
+            return (path.getParent() == null ? path : path.getParent()).resolve(getFileName() + '.' + ext);
         }
-        if ((path.getParent() == null ? path : path.getParent()).resolve(getFileName() + '.' + ext).toFile().exists()) {
-            System.err.println("The file was exist in this path");
-            interrupt();
-            return null;
-        } else if (Files.isWritable(path.getParent())) {
-            try {
-                Files.createFile(path);
-                System.out.println("Created file in: " + path);
-            } catch (FileAlreadyExistsException ignore) {}
-            return ((path.getParent() == null ? path : path.getParent())).resolve(getFileName() + '.' + ext);
-        } else if (!Files.isWritable(Path.of(fileCreatePath))) {
-            System.err.println("Haven't write permission: " + fileCreatePath);
-        }
-        return (path.getParent() == null ? path : path.getParent()).resolve(getFileName() + '.' + ext);
+        return null;
     }
     public static void fileParse() {
         try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {

@@ -43,6 +43,7 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
     public static int parenthesesCount = 0;
     public static int angleBracketsCount = 0;
     public static boolean isFullyQualifiedName = false;
+    
     public static void javaFileExecuteOfConvert() throws Exception {
         if (!runnable) {
             return;
@@ -202,7 +203,7 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
             int h =
                 switch (raf.read()) {
                 case 0x11, 0x12, 0x13, 0x14 -> 0;
-                case 0x21, 0x22, 0x23, 0x15 -> 1;
+                case 0x21, 0x22, 0x23, 0x24 -> 1;
                 default -> throw new LerVarException("Illegal hash value, it may be supported in OTHER LerVar Nucleus: 0x" + Integer.toHexString(raf.read()).toUpperCase());
                 };
             System.out.print("Create Java file to(Enter \"0\" to create file in original location, or enter a path to create the file into):\n->");
@@ -210,23 +211,39 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
             int i1 = i + (int) FILE_HEAD_STRUCTURE[2][1] + (int) FILE_HEAD_STRUCTURE[3][1] + (int) FILE_HEAD_STRUCTURE[4][1] +
                     (int) FILE_HEAD_STRUCTURE[5][1] + (int) FILE_HEAD_STRUCTURE[6][1] + (int) FILE_HEAD_STRUCTURE[7][1];
             raf.seek(i1);
-            int i2 = hashLengthOnByte[h][hashPattern];
             fileCreate("java");
-            while (i1 <= Files.size(Path.of(fileCreatePath)) - i2) {
-                if (raf.read() <= 0xEF && !(raf.read() >= 0xD0 && raf.read() <= 0xD9)) {
-                    Files.write(Path.of(fileCreatePath), String.valueOf(javaFileContentMap[raf.read()][0]).getBytes(), StandardOpenOption.APPEND);
-                    if ((raf.read() >= 0xA0 && raf.read() <= 0xB4) || (raf.read() >= 0xC0 && raf.read() <= 0xCD) || (raf.read() >= 0xE0 && raf.read() <= 0xE9)) {
+            int i2 = hashLengthOnByte[h][
+                    switch (hashPattern) {
+                    case 0x11, 0x21 -> 0;
+                    case 0x13, 0x23 -> 2;
+                    case 0x14, 0x24 -> 3;
+                    default -> 1;
+                }
+            ];
+            int reader;
+            while (raf.getFilePointer() <= Files.size(Path.of(filePath)) - i2 - 1 && runnable) {
+                reader = raf.read();
+                if (reader <= 0xEF && !(reader >= 0xD0 && reader <= 0xD9)) {
+                    Files.write(Path.of(fileCreatePath), String.valueOf(javaFileContentMap[reader][0]).getBytes(), StandardOpenOption.APPEND);
+                    if (!(reader == 0x68 | (reader >= 0x6C && reader <= 0x75)) &&
+                            !((reader >= 0xA0 && reader <= 0xB4) || (reader >= 0xC0 && reader <= 0xCD) || (reader >= 0xE0 && reader <= 0xE9))) {
                         Files.write(Path.of(fileCreatePath), " ".getBytes(), StandardOpenOption.APPEND);
+                    } else if (reader == 0x68 | (reader >= 0x6C && reader <= 0x75 && reader != 0x6F)) {
+                        Files.write(Path.of(fileCreatePath), ".".getBytes(), StandardOpenOption.APPEND);
                     }
-                } else if (raf.read() == 0xD0) {
+                } else if (reader == 0xD0) {
+                    int r;
                     StringBuilder sb = new StringBuilder();
                     if (javaFileContentMap[0xF0][0] == EMPTY) {
-                        for (int j = 497; j >= 234; j--) {
+                        for (int j = 479; j >= 0xF0; j--) {
                             if (javaFileContentMap[j][0] == EMPTY) {
-                                while (raf.read() != 0x00) {
-                                    raf.seek(++i1);
-                                    sb.append(raf.readChar());
+                                r = raf.read();
+                                while (r != 0x00) {
+                                    sb.append((char) r);
+                                    r = raf.read();
                                 }
+                                javaFileContentMap[j][0] = sb.toString();
+                                Files.write(Path.of(fileCreatePath), sb.toString().getBytes(), StandardOpenOption.APPEND);
                                 break;
                             }
                         }
@@ -234,33 +251,33 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
                         for (int j = 3599; j >= 0; j--) {
                             if (javaFileContentMapExtend[j][0] == EMPTY) {
                                 while (raf.read() != 0x00) {
-                                    raf.seek(++i1);
                                     sb.append(raf.readChar());
                                 }
+                                javaFileContentMapExtend[j][0] = sb.toString();
                                 break;
                             }
                         }
                     } else if (javaFileContentMap3ByteExtend[0][0] != EMPTY | javaFileContentMap3ByteExtend[0][0] != null) {
                         for (int j = 61439; j >= 0; j--) {
-                            if (javaFileContentMapExtend[j][0] == EMPTY) {
+                            if (javaFileContentMap3ByteExtend[j][0] == EMPTY) {
                                 while (raf.read() != 0x00) {
-                                    raf.seek(++i1);
                                     sb.append(raf.readChar());
                                 }
+                                javaFileContentMap3ByteExtend[j][0] = sb.toString();
                                 break;
                             }
                         }
                     }
-                } else if (raf.read() == 0xD1) {
+                } else if (reader == 0xD1) {
                     StringBuilder sb = new StringBuilder("\"");
                     if (javaFileContentMap[0xF0][0] == EMPTY) {
                         for (int j = 497; j >= 234; j--) {
                             if (javaFileContentMap[j][0] == EMPTY) {
                                 while (raf.read() != 0x00) {
-                                    raf.seek(++i1);
                                     sb.append(raf.readChar());
                                 }
                                 sb.append("\"");
+                                javaFileContentMap[j][0] = sb.toString();
                                 break;
                             }
                         }
@@ -268,7 +285,6 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
                         for (int j = 3599; j >= 0; j--) {
                             if (javaFileContentMapExtend[j][0] == EMPTY) {
                                 while (raf.read() != 0x00) {
-                                    raf.seek(++i1);
                                     sb.append(raf.readChar());
                                 }
                                 sb.append("\"");
@@ -279,7 +295,6 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
                         for (int j = 61439; j >= 0; j--) {
                             if (javaFileContentMapExtend[j][0] == EMPTY) {
                                 while (raf.read() != 0x00) {
-                                    raf.seek(++i1);
                                     sb.append(raf.readChar());
                                 }
                                 sb.append("\"");
@@ -287,8 +302,49 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
                             }
                         }
                     }
+                } else if (reader == 0xF0) {
+                    int mapPointer = 0xF0 + raf.read();
+                } else if (reader >= 0xF1 && !(raf.read() >= 0xF0)) {
+                    raf.seek(raf.getFilePointer() - 1);
+                    int mapPointer = (reader - 0xF1) * 0xF0 - 1 + raf.read();
+                } else if (reader >= 0xF1 && raf.read() >= 0xF0) {
+                    raf.seek(raf.getFilePointer() - 1);
+                    int j = raf.read();
+                    int mapPointer = (reader - 0xF0) * 0xF0 + (j - 0xF0) * 0xF0 + raf.read();
+                } else if (reader >= 0xD5
+//                        && reader <= 0xD9
+                ) {
+                    StringBuilder sb = new StringBuilder();
+                    int rd1 = raf.read();
+                    while (rd1 != 0x00) {
+                        if (rd1 <= 0xEF) {
+                            sb.append(javaFileContentMap[rd1][0]).append(" ");
+                            rd1 = raf.read();
+                        } else if (rd1 == 0xF0) {
+                            int mapPointer = 0xF0 + raf.read();
+                            sb.append(javaFileContentMap[mapPointer][0]);
+                        } else if (rd1 >= 0xF1) {
+                            int mapPointer = (reader - 0xF1) * 0xF0 - 1 + raf.read();
+                            sb.append(javaFileContentMapExtend[mapPointer][0]);
+                        } else if (reader >= 0xF1 && raf.read() >= 0xF0) {
+                            raf.seek(raf.getFilePointer() - 1);
+                            int j = raf.read();
+                            int mapPointer = (reader - 0xF0) * 0xF0 + (j - 0xF0) * 0xF0 + j;
+                            sb.append(javaFileContentMap3ByteExtend[mapPointer][0]);
+                        }
+                    }
+                    int i3 = switch (reader) {
+                        case 0xD5 -> 2;
+                        case 0xD6 -> 3;
+                        case 0xD7 -> 4;
+                        case 0xD8 -> 5;
+                        case 0xD9 -> 10;
+                        default -> 0;
+                    };
+                    for (; i3 >= 1; i3--) {
+                        Files.write(Path.of(fileCreatePath), sb.toString().getBytes(), StandardOpenOption.APPEND);
+                    }
                 }
-                raf.seek(++i1);
             }
         } catch (Exception ignore) {}
     }

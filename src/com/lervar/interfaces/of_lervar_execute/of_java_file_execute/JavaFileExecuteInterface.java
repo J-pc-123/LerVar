@@ -117,20 +117,20 @@ public interface JavaFileExecuteInterface {
            {"java.lang.Class", 0x64},
            {"java.lang.System", 0x65},
            {"java.lang.String", 0x66},
-           {"java.lang.String.valueOf()", 0x67},
-           {"java.lang.Object.toString()", 0x68},
+           {"java.lang.String.valueOf(", 0x67},
+           {"toString()", 0x68},//java.lang.Object.toString()
            {"java.lang.System.in", 0x69},
            {"java.lang.System.out", 0x6A},
            {"java.lang.System.err", 0x6B},
-           {"print()", 0x6C},//java.io.PrintStream.print()
-           {"println()", 0x6D},//java.io.PrintStream.println()
-           {"printf()", 0x6E},//java.io.PrintStream.printf()
+           {"print(", 0x6C},//java.io.PrintStream.print()
+           {"println(", 0x6D},//java.io.PrintStream.println()
+           {"printf(", 0x6E},//java.io.PrintStream.printf()
            {"java.util.Scanner", 0x6F},
-           {"nextLine()", 0x70},//java.util.Scanner.nextLine()
-           {"nextInt()", 0x71},//java.util.Scanner.nextInt()
-           {"nextByte()", 0x72},//java.util.Scanner.nextByte()
-           {"nextShort()", 0x73},//java.util.Scanner.nextShort()
-           {"nextLong()", 0x74},//java.util.Scanner.nextLong()
+           {"nextLine(", 0x70},//java.util.Scanner.nextLine()
+           {"nextInt(", 0x71},//java.util.Scanner.nextInt()
+           {"nextByte(", 0x72},//java.util.Scanner.nextByte()
+           {"nextShort(", 0x73},//java.util.Scanner.nextShort()
+           {"nextLong(", 0x74},//java.util.Scanner.nextLong()
            {"nextBoolean()", 0x75},//java.util.Scanner.nextBoolean()
            {"java.lang.Number", 0x76},
            {"java.lang.Math", 0x77},
@@ -196,7 +196,7 @@ public interface JavaFileExecuteInterface {
            {";", 0xB3},
            {".", 0xB4},
            {"...", 0xB5},
-           {EMPTY, 0xB6},
+           {"->", 0xB6},
            {EMPTY, 0xB7},
            {EMPTY, 0xB8},
            {EMPTY, 0xB9},
@@ -219,8 +219,8 @@ public interface JavaFileExecuteInterface {
            {"+", 0xCA},
            {"-", 0xCB},
            {"*", 0xCC},
-           {"%", 0xCD},
-           {EMPTY, 0xCE},
+           {"/", 0xCD},
+           {"%", 0xCE},
            {EMPTY, 0xCF},
            {isIdentifier, 0xD0},
            {isText, 0xD1},
