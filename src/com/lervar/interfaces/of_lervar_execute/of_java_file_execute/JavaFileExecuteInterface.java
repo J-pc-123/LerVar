@@ -55,7 +55,7 @@ public interface JavaFileExecuteInterface {
            {"abstract", 0x26},
            {"static", 0x27},
            {"void", 0x28},
-           {"static void main(String[] " + mainMethodArrayIdentifier + ")", 0x29},
+           {"public static void main(String[] " + mainMethodArrayIdentifier + ")", 0x29},
            {"return", 0x2A},
            {"final", 0x2B},
            {"byte", 0x2C},
