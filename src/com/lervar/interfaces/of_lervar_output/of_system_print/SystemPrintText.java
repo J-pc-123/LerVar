@@ -20,8 +20,8 @@ public interface SystemPrintText {
                WWW                             /
                WWW                            /
               WWW                            /
-              WWW            MMMM   WW WWW\u001B[31mW\u001B[0m /
-             WWW           MMwwwMM  W^W    \u001B[0m/\u001B[31mW\u001B[0m
+              WWW            MMMM   WW WWW\u001B[31m >\u001B[0m/
+             WWW           MMwwwMM  W^W   \u001B[0mW/\u001B[31m<\u001B[0m
              WWW      WWW  MM       WW    / MMM           MMM
             WWWWWWWWWWWWW   MMMMM^  WW   /  MMM          MMM
                                         /    MMM        MMM
@@ -91,7 +91,7 @@ public interface SystemPrintText {
             > Who owns the copyright of LerVar?
             --J_pc
             > Whether LerVar is open source?
-            -Yes, it's licence is MIT and it was uploaded on Github
+            --Yes, it's licence is MIT and it was uploaded on Github
             > What LerVar can do?
             --LerVar can convert, parse, encrypt& convert the file
             --LerVar can execute the file and create a new file(.lvr file) that smaller than source file
@@ -100,9 +100,9 @@ public interface SystemPrintText {
             --.java file
             --.jar file
             > How to contact author(s)?
-            -Review on https://github.com/J-pc-123/LerVar
-            -Mail to 1691365315@qq.com
-             (If you don't within the Chinese mainland network, or haven't connect to the Chinese mainland network via VPN, send e-mail may be NOT a stable choice)
+            --Review on https://github.com/J-pc-123/LerVar
+            --Mail to 1691365315@qq.com
+              (If you don't within the Chinese mainland network, or haven't connect to the Chinese mainland network via VPN, send e-mail may be NOT a stable choice)
             """;
     String LERVAR_VERSION = "v.pre-1.0_Beta2";
     String OS = System.getProperty("os.name").toLowerCase();

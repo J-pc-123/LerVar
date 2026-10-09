@@ -243,7 +243,51 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
                                     r = raf.read();
                                 }
                                 javaFileContentMap[j][0] = sb.toString();
-                                Files.write(Path.of(fileCreatePath), sb.toString().getBytes(), StandardOpenOption.APPEND);
+                                Files.write(Path.of(fileCreatePath), (sb.append(" ").toString()).getBytes(), StandardOpenOption.APPEND);
+                                break;
+                            }
+                        }
+                    } else if (javaFileContentMapExtend[0][0] != EMPTY | javaFileContentMapExtend[0][0] != null) {
+                        for (int j = 3599; j >= 0; j--) {
+                            if (javaFileContentMapExtend[j][0] == EMPTY) {
+                                r = raf.read();
+                                while (r != 0x00) {
+                                    sb.append((char) r);
+                                    r = raf.read();
+                                }
+                                javaFileContentMapExtend[j][0] = sb.toString();
+                                Files.write(Path.of(fileCreatePath), (sb.append(" ").toString()).getBytes(), StandardOpenOption.APPEND);
+                                break;
+                            }
+                        }
+                    } else if (javaFileContentMap3ByteExtend[0][0] != EMPTY | javaFileContentMap3ByteExtend[0][0] != null) {
+                        for (int j = 61439; j >= 0; j--) {
+                            if (javaFileContentMap3ByteExtend[j][0] == EMPTY) {
+                                r = raf.read();
+                                while (r != 0x00) {
+                                    sb.append((char) r);
+                                    r = raf.read();
+                                }
+                                javaFileContentMap3ByteExtend[j][0] = sb.toString();
+                                Files.write(Path.of(fileCreatePath), (sb.append(" ").toString()).getBytes(), StandardOpenOption.APPEND);
+                                break;
+                            }
+                        }
+                    }
+                } else if (reader == 0xD1) {
+                    int r1;
+                    StringBuilder sb = new StringBuilder("\"");
+                    if (javaFileContentMap[0xF0][0] == EMPTY) {
+                        for (int j = 479; j >= 234; j--) {
+                            if (javaFileContentMap[j][0] == EMPTY) {
+                                r1 = raf.read();
+                                while (r1 != 0x00) {
+                                    sb.append((char) r1);
+                                    r1 = raf.read();
+                                }
+                                sb.append("\"");
+                                javaFileContentMap[j][0] = sb.toString();
+                                Files.write(Path.of(fileCreatePath), (sb.append(" ").toString()).getBytes(), StandardOpenOption.APPEND);
                                 break;
                             }
                         }
@@ -253,7 +297,9 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
                                 while (raf.read() != 0x00) {
                                     sb.append(raf.readChar());
                                 }
+                                sb.append("\"");
                                 javaFileContentMapExtend[j][0] = sb.toString();
+                                Files.write(Path.of(fileCreatePath), (sb.append(" ").toString()).getBytes(), StandardOpenOption.APPEND);
                                 break;
                             }
                         }
@@ -263,41 +309,9 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
                                 while (raf.read() != 0x00) {
                                     sb.append(raf.readChar());
                                 }
+                                sb.append("\"");
                                 javaFileContentMap3ByteExtend[j][0] = sb.toString();
-                                break;
-                            }
-                        }
-                    }
-                } else if (reader == 0xD1) {
-                    StringBuilder sb = new StringBuilder("\"");
-                    if (javaFileContentMap[0xF0][0] == EMPTY) {
-                        for (int j = 497; j >= 234; j--) {
-                            if (javaFileContentMap[j][0] == EMPTY) {
-                                while (raf.read() != 0x00) {
-                                    sb.append(raf.readChar());
-                                }
-                                sb.append("\"");
-                                javaFileContentMap[j][0] = sb.toString();
-                                break;
-                            }
-                        }
-                    } else if (javaFileContentMapExtend[0][0] != EMPTY | javaFileContentMapExtend[0][0] != null) {
-                        for (int j = 3599; j >= 0; j--) {
-                            if (javaFileContentMapExtend[j][0] == EMPTY) {
-                                while (raf.read() != 0x00) {
-                                    sb.append(raf.readChar());
-                                }
-                                sb.append("\"");
-                                break;
-                            }
-                        }
-                    } else if (javaFileContentMap3ByteExtend[0][0] != EMPTY | javaFileContentMap3ByteExtend[0][0] != null) {
-                        for (int j = 61439; j >= 0; j--) {
-                            if (javaFileContentMapExtend[j][0] == EMPTY) {
-                                while (raf.read() != 0x00) {
-                                    sb.append(raf.readChar());
-                                }
-                                sb.append("\"");
+                                Files.write(Path.of(fileCreatePath), (sb.append(" ").toString()).getBytes(), StandardOpenOption.APPEND);
                                 break;
                             }
                         }
@@ -316,13 +330,16 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
 //                }
                 else if (reader == 0xF0) {
                     int mapPointer = 0xF0 + raf.read();
+                    Files.write(Path.of(fileCreatePath), (javaFileContentMap[mapPointer][0] + " ").getBytes(), StandardOpenOption.APPEND);
                 } else if (reader >= 0xF1 && !(raf.read() >= 0xF0)) {
                     raf.seek(raf.getFilePointer() - 1);
                     int mapPointer = (reader - 0xF1) * 0xF0 - 1 + raf.read();
+                    Files.write(Path.of(fileCreatePath), (javaFileContentMap[mapPointer][0] + " ").getBytes(), StandardOpenOption.APPEND);
                 } else if (reader >= 0xF1 && raf.read() >= 0xF0) {
                     raf.seek(raf.getFilePointer() - 1);
                     int j = raf.read();
                     int mapPointer = (reader - 0xF0) * 0xF0 + (j - 0xF0) * 0xF0 + raf.read();
+                    Files.write(Path.of(fileCreatePath), (javaFileContentMap[mapPointer][0] + " ").getBytes(), StandardOpenOption.APPEND);
                 } else if (reader >= 0xD5
 //                        && reader <= 0xD9
                 ) {
@@ -368,7 +385,7 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
                     Files.write(Path.of(fileCreatePath), javaFileContentMap[0x29][0].toString().getBytes(), StandardOpenOption.APPEND);
                 }
             }
-        } catch (Exception ignore) {}
+        } catch (Exception ignore) {ignore.printStackTrace();}
     }
     public static void jarFileExecuteOfParse() {
     
