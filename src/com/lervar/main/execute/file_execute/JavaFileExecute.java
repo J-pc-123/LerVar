@@ -294,8 +294,10 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
                     } else if (javaFileContentMapExtend[0][0] != EMPTY | javaFileContentMapExtend[0][0] != null) {
                         for (int j = 3599; j >= 0; j--) {
                             if (javaFileContentMapExtend[j][0] == EMPTY) {
-                                while (raf.read() != 0x00) {
+                                r1 = raf.read();
+                                while (r1 != 0x00) {
                                     sb.append(raf.readChar());
+                                    r1 = raf.read();
                                 }
                                 sb.append("\"");
                                 javaFileContentMapExtend[j][0] = sb.toString();
@@ -306,8 +308,10 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
                     } else if (javaFileContentMap3ByteExtend[0][0] != EMPTY | javaFileContentMap3ByteExtend[0][0] != null) {
                         for (int j = 61439; j >= 0; j--) {
                             if (javaFileContentMap3ByteExtend[j][0] == EMPTY) {
-                                while (raf.read() != 0x00) {
+                                r1 = raf.read();
+                                while (r1 != 0x00) {
                                     sb.append(raf.readChar());
+                                    r1 = raf.read();
                                 }
                                 sb.append("\"");
                                 javaFileContentMap3ByteExtend[j][0] = sb.toString();
