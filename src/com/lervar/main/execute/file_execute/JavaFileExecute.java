@@ -333,7 +333,7 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
 //                    }
 //                }
                 else if (reader == 0xF0) {
-                    int mapPointer = 0xF0 + raf.read();
+                    int mapPointer = 0xF0 + raf.read() - 1;
                     Files.write(Path.of(fileCreatePath), (javaFileContentMap[mapPointer][0] + " ").getBytes(), StandardOpenOption.APPEND);
                 } else if (reader >= 0xF1 && !(raf.read() >= 0xF0)) {
                     raf.seek(raf.getFilePointer() - 1);
@@ -389,7 +389,7 @@ public class JavaFileExecute implements JavaFileExecuteInterface, LerVarFileStru
                     Files.write(Path.of(fileCreatePath), javaFileContentMap[0x29][0].toString().getBytes(), StandardOpenOption.APPEND);
                 }
             }
-        } catch (Exception ignore) {ignore.printStackTrace();}
+        } catch (Exception ignore) {}
     }
     public static void jarFileExecuteOfParse() {
     
