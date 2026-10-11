@@ -221,7 +221,7 @@ public interface JavaFileExecuteInterface {
            {"*", 0xCC},
            {"/", 0xCD},
            {"%", 0xCE},
-           {EMPTY, 0xCF},
+           {"=", 0xCF},
            {isIdentifier, 0xD0},
            {isText, 0xD1},
            {isFormatCode, 0xD2},
