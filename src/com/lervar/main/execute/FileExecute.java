@@ -224,6 +224,18 @@ public class FileExecute extends LerVarExecute implements ExecuteInterface, Opti
             checkPath();
         }
     }
+    public static void fileVerify() {
+        try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {
+            raf.seek(0);
+            long l = raf.read() + (int) FILE_HEAD_STRUCTURE[2][1] + (int) FILE_HEAD_STRUCTURE[3][1] + (int) FILE_HEAD_STRUCTURE[4][1] + (int) FILE_HEAD_STRUCTURE[5][1]
+                    + (int) FILE_HEAD_STRUCTURE[6][1] + (int) FILE_HEAD_STRUCTURE[7][1] + (int) FILE_HEAD_STRUCTURE[8][1];
+            raf.seek(l);
+            if (runnable) {
+            
+            }
+        } catch (Exception ignore) {}
+    }
+    
     public static String getFileName() {
         File file = new File(filePath);
         return file.getName().substring(0, file.getName().lastIndexOf('.'));

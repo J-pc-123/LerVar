@@ -10,5 +10,7 @@
 package com.lervar.main.execute.verify.file_verify;
 
 public class FileVerify {
-
+    public static void dataVerify(int verifyType) {
+    
+    }
 }
